@@ -178,6 +178,7 @@ const char *fecha_cadena(Fecha f){
     switch (timeinfo->tm_wday)  //   COMO DEVOLVER LA CADENA
     {
         case 0: return DIASEM[0] + timeinfo->tm_mday + " de " + MES[timeinfo->tm_mon] + " de " + timeinfo->tm_year;
+            
             break;
         case 1:
             break;
