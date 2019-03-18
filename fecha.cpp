@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <ctime>
 #include "fecha.hpp"
 
 Fecha::Fecha(const char* f)
@@ -48,15 +49,15 @@ void Fecha::correcto(){
         throw Invalida("error por el año");
     }
     if(mes_ <= 0 || mes_ >= 13){
-        
+        throw Invalida("error por el mes");
     }
     if(anno_ % 4 == 0 && (anno_ % 100 != 0 || anno_ % 400 == 0)){
         if(dia_ <= 0 || dia_ >= 30 ){
-            
+            throw Invalida("error por el dia");
         }
     }else{
         if(dia_ <= 0 || dia_ >= DIA_S[mes_]){
-            
+            throw Invalida("error por el dia");
         }
     }
 }
@@ -93,12 +94,6 @@ int Fecha::mes(){
 
 int Fecha::anno(){
     return anno_;
-}
-
-void Fecha::operator=(Fecha f) const{
-    dia_ = f.dia();
-    mes_ = f.mes();
-    anno_ = f.anno();
 }
 
 Fecha& Fecha::operator-=(int n){
@@ -169,4 +164,34 @@ bool Fecha::operator<=(Fecha f) const{
 
 bool Fecha::operator>=(Fecha f) const{
     return !(f < *this);
+}
+
+const char *fecha_cadena(Fecha f){
+    string DIASEM[7]={"lunes","martes","miércoles","jueves","viernes","sábado","domingo"};
+    string MES[12] ={"enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"};
+    struct tm * timeinfo;
+    timeinfo->tm_year = f.anno() - 1900;
+    timeinfo->tm_mon = f.mes() - 1;
+    timeinfo->tm_mday = f.dia();
+    mktime(timeinfo);
+    string cadena;
+    switch (timeinfo->tm_wday)  //   COMO DEVOLVER LA CADENA
+    {
+        case 0: return DIASEM[0] + timeinfo->tm_mday + " de " + MES[timeinfo->tm_mon] + " de " + timeinfo->tm_year;
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        default:
+            break;
+    }
 }

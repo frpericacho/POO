@@ -22,7 +22,8 @@ class Fecha{
         int dia();
         int mes();
         int anno();
-        void operator=(Fecha) const;
+        const char *cadena() const;
+        Fecha &operator=(const Fecha &) = default;
         Fecha& operator+=(int );
         Fecha& operator-=(int );
         Fecha operator-(int ) const;
@@ -37,6 +38,7 @@ class Fecha{
         bool operator>(Fecha ) const;
         bool operator<=(Fecha ) const;
         bool operator>=(Fecha ) const;
+        const char *fecha_cadena(Fecha );
 
     private:
         void correcto();
