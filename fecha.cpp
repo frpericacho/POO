@@ -171,8 +171,13 @@ Fecha::operator const char *() const{
     timeinfo->tm_year = this->anno_ - 1900;
     timeinfo->tm_mon = this->mes_ - 1;
     timeinfo->tm_mday = this->dia_;
+
     std::setlocale(LC_TIME, "es_ES.UTF-8");
+    
     mktime(timeinfo);
-    std::strftime(timeinfo, ); // TERMINAR LA FUNCION
-    return timeinfo;
+    char cadena[40];
+
+    std::strftime(cadena, 40, "%A %d de %B de %Y",timeinfo); // ES CORRECTA?
+    
+    return cadena;
 }
