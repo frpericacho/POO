@@ -166,33 +166,13 @@ bool Fecha::operator>=(Fecha f) const{
     return !(f < *this);
 }
 
-const char *fecha_cadena(Fecha f){
-    string DIASEM[7]={"lunes","martes","miércoles","jueves","viernes","sábado","domingo"};
-    string MES[12] ={"enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"};
+Fecha::operator const char *() const{
     struct tm * timeinfo;
-    timeinfo->tm_year = f.anno() - 1900;
-    timeinfo->tm_mon = f.mes() - 1;
-    timeinfo->tm_mday = f.dia();
+    timeinfo->tm_year = this->anno_ - 1900;
+    timeinfo->tm_mon = this->mes_ - 1;
+    timeinfo->tm_mday = this->dia_;
+    std::setlocale(LC_TIME, "es_ES.UTF-8");
     mktime(timeinfo);
-    string cadena;
-    switch (timeinfo->tm_wday)  //   COMO DEVOLVER LA CADENA
-    {
-        case 0: return DIASEM[0] + timeinfo->tm_mday + " de " + MES[timeinfo->tm_mon] + " de " + timeinfo->tm_year;
-            
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        default:
-            break;
-    }
+    std::strftime(timeinfo, ); // TERMINAR LA FUNCION
+    return timeinfo;
 }

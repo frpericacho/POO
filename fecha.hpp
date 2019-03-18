@@ -22,7 +22,7 @@ class Fecha{
         int dia();
         int mes();
         int anno();
-        const char *cadena() const;
+        operator const char*() const;
         Fecha &operator=(const Fecha &) = default;
         Fecha& operator+=(int );
         Fecha& operator-=(int );
