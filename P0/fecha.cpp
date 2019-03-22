@@ -84,15 +84,15 @@ Fecha& Fecha::operator+=(int n){
     return *this;
 }
 
-int Fecha::dia(){
+int Fecha::dia() const{
     return dia_;
 }
 
-int Fecha::mes(){
+int Fecha::mes() const{
     return mes_;
 }
 
-int Fecha::anno(){
+int Fecha::anno() const{
     return anno_;
 }
 
@@ -132,38 +132,38 @@ Fecha& Fecha::operator++(int) {
     return tmp;
 }
 
-bool Fecha::operator==(Fecha f) const{
-    if(dia_ == f.dia_ && mes_ == f.mes_ && anno_ == f.anno_)
+bool operator==(const Fecha &f1, const Fecha &f2) noexcept{
+    if(f1.dia() == f2.dia() && f1.mes() == f2.mes() && f1.anno() == f2.anno())
         return true;
     else
         return false;
 }
 
-bool Fecha::operator<(Fecha f) const{
-    if(anno_ < f.anno_)
+bool operator<(const Fecha &f1, const Fecha &f2) noexcept{
+    if(f1.anno() < f2.anno())
         return true;
-    if(anno_ == f.anno_ && mes_ < f.mes_)
+    if(f1.anno() == f2.anno() && f1.mes() < f2.mes())
         return true;
-    if(anno_ == f.anno_ && mes_ == f.mes_ && dia_ < f.dia_)
+    if(f1.anno() == f2.anno() && f1.mes() == f2.mes() && f1.dia() < f2.dia())
         return true;
     else 
         return false;
 }
 
-bool Fecha::operator!=(Fecha f) const{
-    return !(*this==f);
+bool operator!=(const Fecha &f1, const Fecha &f2) noexcept{
+    return !(f1 == f2);
 }
 
-bool Fecha::operator>(Fecha f) const{
-    return f < *this;
+bool operator>(const Fecha &f1, const Fecha &f2) noexcept{
+    return f2 < f1;
 }
 
-bool Fecha::operator<=(Fecha f) const{
-    return !(*this < f);
+bool operator<=(const Fecha &f1, const Fecha &f2) noexcept{
+    return !(f1 < f2);
 }
 
-bool Fecha::operator>=(Fecha f) const{
-    return !(f < *this);
+bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{
+    return !(f2 < f1);
 }
 
 Fecha::operator const char *() const{

@@ -7,11 +7,10 @@ using namespace std;
 
 class Fecha{
     public:
-        Fecha(){}
-        Fecha(const Fecha& f);
-        Fecha(int d = 0,int m = 0,int a = 0);
+        Fecha(const Fecha& f) = default;
+        explicit Fecha(int d = 0,int m = 0,int a = 0);
         Fecha(const char* f);
-        const int AnnoMaximo = 1902, AnnoMinimo = 2037;
+        static const int AnnoMaximo = 1902, AnnoMinimo = 2037;
         class Invalida{
             public:
                 Invalida(const char* f);
@@ -32,12 +31,6 @@ class Fecha{
         Fecha& operator++(int );
         Fecha& operator--() ;
         Fecha& operator++();
-        bool operator<(Fecha ) const;
-        bool operator==(Fecha ) const;
-        bool operator!=(Fecha ) const;
-        bool operator>(Fecha ) const;
-        bool operator<=(Fecha ) const;
-        bool operator>=(Fecha ) const;
         const char *fecha_cadena(Fecha );
 
     private:
@@ -45,4 +38,10 @@ class Fecha{
         int dia_,mes_,anno_;
 };
 
+    bool operator<(const Fecha &,const Fecha &) noexcept;
+    bool operator==(const Fecha &,const Fecha &) noexcept;
+    bool operator!=(const Fecha &,const Fecha &) noexcept;
+    bool operator>(const Fecha &,const Fecha &) noexcept;
+    bool operator<=(const Fecha &,const Fecha &) noexcept;
+    bool operator>=(const Fecha &,const Fecha &) noexcept;
 #endif
