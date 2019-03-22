@@ -1531,7 +1531,7 @@ void execute::noExceptMethod(const MatchFinder::MatchResult &Result){
 				if(checkParams(foundNoExceptMethod,(it->second).getParameters())){
 					if (markedConst((it->second).getConstant(), foundNoExceptMethod->isConst())){
 						const FunctionProtoType *FP = foundNoExceptMethod->getType()->castAs<FunctionProtoType>();
-						if(FP && FP->isNothrow(*Context)){
+						if(FP && FP->isNothrow()){
 							(it->second).setFound(true);
 						}
 					}

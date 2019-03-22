@@ -19,9 +19,9 @@ class Fecha{
             private:
                 const char* cad;
         };
-        int dia();
-        int mes();
-        int anno();
+        int dia() const;
+        int mes() const;
+        int anno() const;
         operator const char*() const;
         Fecha &operator=(const Fecha &) = default;
         Fecha& operator+=(int );

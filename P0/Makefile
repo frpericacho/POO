@@ -1,12 +1,14 @@
-CXX=clang++
-STD=c++17
-CXXFLAGS= -std=${STD} -g -Wall -pedantic -Wextra
-CPPFLAGS= -DP0 -I../Tests-auto -I.
-SRC= fecha.cpp test-auto.cpp test-caso0-fecha-auto.cpp test-P0-consola.cpp#incluir luego cadena.cpp
-OBJ= ${SRC:.cpp=.o}
-EXE= test-P0-consola.out
-AUTO= test-auto.out
-RMV= rm -f
+CXX = clang++
+STD = c++17
+CXXFLAGS = -std=${STD} -g -Wall -pedantic -Wextra
+CPPFLAGS = -DP0 -I../Tests-auto -I.
+VPATH = ../Tests-auto:.
+SRC = fecha.cpp test-auto.cpp test-caso0-fecha-auto.cpp test-P0-consola.cpp
+#incluir luego cadena.cpp
+RMV = rm -f
+OBJ := $(SRC:.cpp=.o)
+EXE = test-P0-consola
+AUTO = test-auto
 
 all: ${EXE} ${AUTO}
 
@@ -18,24 +20,23 @@ run-console: ${EXE}
 
 run-dsl: fecha_check #cadena_check
 	./fecha_check fecha.cpp -- -std=${STD}
-	#./cadena_check cadena.cpp -- -std=${STD}
+#./cadena_check cadena.cpp -- -std=${STD}
 
 fecha_check: fecha_check.cpp 
-	${MAKE} -f Make_check.mk
+	$(MAKE) -f Make_check.mk
 
 
 ${EXE}: fecha.o test-P0-consola.o
-	${CXX} ${CXXFLAGS} $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 ${AUTO}: test-caso0-fecha-auto.o test-auto.o fecha.o #cadena.o test-caso0-cadena-auto.o
-	${CXX} ${CXXFLAGS} ${CPPFLAGS} $^ -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
 
-${OBJ}: ${SRC}
-
+$(OBJ): $(SRC)
 
 #cadena_check: cadena_check.cpp
-	#${MAKE} -f Make_check.mk
+#${MAKE} -f Make_check.mk
 
 limpia: 
-	${RMV} *.o
-	${MAKE} -f Make_check.mk clean
+	$(RMV) *.o
+	$(MAKE) -f Make_check.mk clean
