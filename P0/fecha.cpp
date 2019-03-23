@@ -62,10 +62,10 @@ void Fecha::correcto(){
     }
 }
 
-Fecha::Invalida::Invalida(const char* f):cad(f){}
+Fecha::Invalida::Invalida(const char *f):cad(f){}
 
-const char* Fecha::Invalida::por_que(const char* f){
-    return f;
+const char *Fecha::Invalida::por_que(){
+    return cad;
 }
 
 Fecha& Fecha::operator+=(int n){
@@ -84,15 +84,15 @@ Fecha& Fecha::operator+=(int n){
     return *this;
 }
 
-int Fecha::dia() const{
+int Fecha::dia() const noexcept{
     return dia_;
 }
 
-int Fecha::mes() const{
+int Fecha::mes() const noexcept{
     return mes_;
 }
 
-int Fecha::anno() const{
+int Fecha::anno() const noexcept{
     return anno_;
 }
 
@@ -132,6 +132,11 @@ Fecha& Fecha::operator++(int) {
     return tmp;
 }
 
+std::ostream &operator<<(std::ostream &out, const Fecha &f) noexcept{
+    out << f.fecha_cadena();
+    return out;
+}
+
 bool operator==(const Fecha &f1, const Fecha &f2) noexcept{
     if(f1.dia() == f2.dia() && f1.mes() == f2.mes() && f1.anno() == f2.anno())
         return true;
@@ -166,11 +171,11 @@ bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{
     return !(f2 < f1);
 }
 
-Fecha::operator const char *() const{
+const char *Fecha::fecha_cadena() const{
     struct tm * timeinfo;
-    timeinfo->tm_year = this->anno_ - 1900;
-    timeinfo->tm_mon = this->mes_ - 1;
-    timeinfo->tm_mday = this->dia_;
+    timeinfo->tm_year = this->anno() - 1900;
+    timeinfo->tm_mon = this->mes() - 1;
+    timeinfo->tm_mday = this->dia();
 
     std::setlocale(LC_TIME, "es_ES.UTF-8");
     

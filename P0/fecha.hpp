@@ -7,41 +7,41 @@ using namespace std;
 
 class Fecha{
     public:
-        Fecha(const Fecha& f) = default;
-        explicit Fecha(int d = 0,int m = 0,int a = 0);
-        Fecha(const char* f);
-        static const int AnnoMaximo = 1902, AnnoMinimo = 2037;
-        class Invalida{
+        Fecha(const Fecha &) = default;    //
+        explicit Fecha(int d = 0,int m = 0,int a = 0);  //
+        Fecha(const char *);   //
+        static const int AnnoMaximo = 1902, AnnoMinimo = 2037;  //
+        class Invalida{     //
             public:
-                Invalida(const char* f);
-                const char* por_que(const char* f);
+                explicit Invalida(const char *f);
+                const char *por_que();
             private:
-                const char* cad;
+                const char *cad;
         };
-        int dia() const;
-        int mes() const;
-        int anno() const;
-        operator const char*() const;
-        Fecha &operator=(const Fecha &) = default;
-        Fecha& operator+=(int );
-        Fecha& operator-=(int );
-        Fecha operator-(int ) const;
-        Fecha operator+(int ) const;
-        Fecha& operator--(int );
-        Fecha& operator++(int );
-        Fecha& operator--() ;
-        Fecha& operator++();
-        const char *fecha_cadena(Fecha );
+        int dia() const noexcept;    //
+        int mes() const noexcept;    //
+        int anno() const noexcept;   //
+        Fecha &operator=(const Fecha &) = default;  //
+        Fecha& operator+=(int );    //
+        Fecha& operator-=(int );    //
+        Fecha operator-(int ) const;    //
+        Fecha operator+(int ) const;    //
+        Fecha& operator--(int );    //
+        Fecha& operator++(int );    //
+        Fecha& operator--() ;   //
+        Fecha& operator++();    //
+        const char *fecha_cadena() const;    //   
 
     private:
-        void correcto();
-        int dia_,mes_,anno_;
+        void correcto();    //
+        int dia_,mes_,anno_;    //
 };
-
-    bool operator<(const Fecha &,const Fecha &) noexcept;
-    bool operator==(const Fecha &,const Fecha &) noexcept;
-    bool operator!=(const Fecha &,const Fecha &) noexcept;
-    bool operator>(const Fecha &,const Fecha &) noexcept;
-    bool operator<=(const Fecha &,const Fecha &) noexcept;
-    bool operator>=(const Fecha &,const Fecha &) noexcept;
+    std::istream &operator>>(std::ostream &out, const Fecha &f) noexcept;   //
+    std::ostream &operator<<(std::istream &in, Fecha &f);   //
+    bool operator<(const Fecha &,const Fecha &) noexcept;   //
+    bool operator==(const Fecha &,const Fecha &) noexcept;  //
+    bool operator!=(const Fecha &,const Fecha &) noexcept;  //
+    bool operator>(const Fecha &,const Fecha &) noexcept;   //
+    bool operator<=(const Fecha &,const Fecha &) noexcept;  //
+    bool operator>=(const Fecha &,const Fecha &) noexcept;  //
 #endif
