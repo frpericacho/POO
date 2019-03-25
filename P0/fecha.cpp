@@ -34,20 +34,20 @@ Fecha::Fecha(int d, int m, int a) : dia_(d), mes_(m), anno_(a)
     correcto();
 }
 
-void Fecha::correcto(){
-    int DIA_S[12]={31,28,31,30,31,30,31,31,30,31,30,31};
-    if(anno_ < AnnoMinimo || anno_ > AnnoMaximo){
+void Fecha::correcto() const{
+    static const int DIA_S[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+    if(anno_ < Fecha::AnnoMinimo || anno_ > Fecha::AnnoMaximo){
         throw Invalida("error por el año");
     }
-    if(mes_ <= 0 || mes_ >= 13){
+    if(mes_ < 1 || mes_ > 12){
         throw Invalida("error por el mes");
     }
     if(anno_ % 4 == 0 && (anno_ % 100 != 0 || anno_ % 400 == 0)){
-        if(dia_ <= 0 || dia_ >= 30 ){
-            throw Invalida("error por el dia");
-        }
+        if(mes_ == 1)
+            if(dia_ < 1 || dia_ >= 30)
+                throw Invalida("error por el dia");
     }else{
-        if(dia_ <= 0 || dia_ >= DIA_S[mes_]){
+        if(dia_ < 1 || dia_ > DIA_S[mes_]){
             throw Invalida("error por el dia");
         }
     }

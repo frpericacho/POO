@@ -34,7 +34,7 @@ class Fecha{
         operator const char*() const;
         ~Fecha() = default;
     private:
-        void correcto();   
+        void correcto() const;   
         int dia_,mes_,anno_;   
 };
     std::istream &operator>>(std::ostream &out, const Fecha &f) noexcept;  
