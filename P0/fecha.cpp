@@ -2,13 +2,15 @@
 #include <cstring>
 #include <ctime>
 #include "fecha.hpp"
+#define BISIESTO (anno_ % 4 == 0 && (anno_ % 400 == 0 || anno_ % 100 != 0)) && mes_ == 2
 
-Fecha::Fecha(const char* f)
+Fecha::Fecha(const char* f): dia_(0), mes_(0), anno_(0)
 {   
     time_t tiempo_calendario = time(nullptr);
     tm *tiempo_descompuesto = localtime(&tiempo_calendario);                                                
     
-    sscanf(f,"%d/%d/%d", &dia_,&mes_,&anno_);
+    if((sscanf(f,"%d/%d/%d", &dia_,&mes_,&anno_)) != 3)
+        throw Invalida("error en la fecha");
     
     if(dia_ == 0)
         dia_ = tiempo_descompuesto->tm_mday;
@@ -35,21 +37,16 @@ Fecha::Fecha(int d, int m, int a) : dia_(d), mes_(m), anno_(a)
 }
 
 void Fecha::correcto() const{
-    static const int DIA_S[12]={31,28,31,30,31,30,31,31,30,31,30,31};
     if(anno_ < Fecha::AnnoMinimo || anno_ > Fecha::AnnoMaximo){
         throw Invalida("error por el año");
     }
     if(mes_ < 1 || mes_ > 12){
         throw Invalida("error por el mes");
     }
-    if((anno_ % 4 == 0 && (anno_ % 100 != 0 || anno_ % 400 == 0)) && mes_ == 1){
-        if(dia_ < 1 || dia_ > 29)
-            throw Invalida("error por el dia bisiesto");
-    }else{
-        if(dia_ < 1 || dia_ >= DIA_S[mes_]){
-            throw Invalida("error por el dia");
-        }
-    }
+
+    static const int DiaMes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (dia_ < 1 || dia_ > (DiaMes[mes_] + static_cast<int>(BISIESTO)))
+        throw Invalida("Dia Incorrecto");
 }
 
 Fecha& Fecha::operator+=(int n){
@@ -115,7 +112,7 @@ Fecha Fecha::operator++(int) {
 }
 
 std::ostream &operator<<(std::ostream &out, const Fecha &f) noexcept{
-    out << f.fecha_cadena();
+    out << f.cadena();
     return out;
 }
 
@@ -160,15 +157,15 @@ bool operator>(const Fecha &f1, const Fecha &f2) noexcept{
     return f2 < f1;
 }
 
-bool operator<=(const Fecha &f1, const Fecha &f2) noexcept{
-    return !(f1 < f2);
-}
-
-bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{
+bool operator<=(const Fecha &f1, const Fecha &f2) noexcept{//mal
     return !(f2 < f1);
 }
 
-const char *Fecha::fecha_cadena() const{
+bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{//mal
+    return !(f1 < f2);
+}
+
+const char *Fecha::cadena() const{
     struct tm * timeinfo{0};
     timeinfo->tm_year = this->anno() - 1900;
     timeinfo->tm_mon = this->mes() - 1;
@@ -185,5 +182,14 @@ const char *Fecha::fecha_cadena() const{
 }
 
 Fecha::operator const char*() const{
-    return fecha_cadena();
+    char* s = new char[40];
+    setlocale(LC_TIME, "");
+    tm f = {};
+    f.tm_mday = dia_;
+    f.tm_mon = mes_ - 1;
+    f.tm_year = anno_ - 1900;
+    mktime(&f);
+    strftime(s, 40, "%A %d de %B de %Y", &f);
+    return s;
+    //return cadena();
 }

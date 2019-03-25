@@ -30,7 +30,7 @@ class Fecha{
         Fecha operator++(int );   //
         Fecha &operator--() ;  //
         Fecha &operator++();   //
-        const char *fecha_cadena() const;  //?    
+        const char *cadena() const;  //?    
         operator const char*() const;//
         ~Fecha() = default;//
     private:
