@@ -62,12 +62,14 @@ const char *Fecha::Invalida::por_que() const{
 Fecha& Fecha::operator+=(int n){
     if(n!=0){
         std::tm *time_tm = new std::tm{
-            .tm_mday = (dia_ + n), .tm_mon = (mes_ -1), .tm_year = (anno_ - 1900)
+            0, 0, 0, (dia_ + n), (mes_ -1), (anno_ - 1900), 0, 0, 0, 0, 0
         };
         
+        std::mktime(time_tm);
+
         dia_ = time_tm->tm_mday;
-        mes_ = time_tm->tm_mon;
-        anno_ = time_tm->tm_year;
+        mes_ = time_tm->tm_mon + 1;
+        anno_ = time_tm->tm_year + 1900;
 
         correcto();
     }
@@ -107,13 +109,13 @@ Fecha& Fecha::operator++(){
     return *this += 1;
 }
 
-Fecha& Fecha::operator--(int) {
+Fecha Fecha::operator--(int) {
     Fecha tmp = *this;
     *this -= 1;
     return tmp;
 }
 
-Fecha& Fecha::operator++(int) {
+Fecha Fecha::operator++(int) {
     Fecha tmp = *this;
     *this += 1;
     return tmp;
@@ -167,7 +169,7 @@ const char *Fecha::fecha_cadena() const{
     std::setlocale(LC_TIME, "es_ES.UTF-8");
     
     mktime(timeinfo);
-    char cadena[40];
+    static char cadena[40];
 
     std::strftime(cadena, 40, "%A %d de %B de %Y",timeinfo); // ES CORRECTA?
     
