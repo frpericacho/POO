@@ -46,7 +46,7 @@ void Fecha::correcto() const{
         if(dia_ < 1 || dia_ > 29)
             throw Invalida("error por el dia bisiesto");
     }else{
-        if(dia_ < 1 || dia_ > DIA_S[mes_]){
+        if(dia_ < 1 || dia_ >= DIA_S[mes_]){
             throw Invalida("error por el dia");
         }
     }
@@ -117,6 +117,21 @@ Fecha Fecha::operator++(int) {
 std::ostream &operator<<(std::ostream &out, const Fecha &f) noexcept{
     out << f.fecha_cadena();
     return out;
+}
+
+std::istream &operator>>(std::istream &in, Fecha &f){
+    char t[11];
+    in.getline(t,11);
+    try
+    {
+        f = Fecha(t);
+    }
+    catch(const Fecha::Invalida &e)
+    {
+        in.setstate(std::ios_base::failbit);
+        throw;
+    }
+    return in;
 }
 
 bool operator==(const Fecha &f1, const Fecha &f2) noexcept{
