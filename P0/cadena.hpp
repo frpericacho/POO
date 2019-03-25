@@ -2,11 +2,8 @@
 #define CADENA_HPP
 #include<iostream>
 
-using namespace std;
-
 class Cadena{
     public:
-    Cadena():tam_(0){}
     Cadena(int , char* );
     Cadena(int );
     Cadena(const Cadena&);

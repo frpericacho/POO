@@ -14,7 +14,7 @@ class Fecha{
         class Invalida{     //
             public:
                 explicit Invalida(const char *f);
-                const char *por_que();
+                const char *por_que() const;
             private:
                 const char *cad;
         };
@@ -31,7 +31,8 @@ class Fecha{
         Fecha& operator--() ;   //
         Fecha& operator++();    //
         const char *fecha_cadena() const;    //   
-
+        operator const char*() const;
+        ~Fecha() = default;
     private:
         void correcto();    //
         int dia_,mes_,anno_;    //

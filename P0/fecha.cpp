@@ -34,15 +34,6 @@ Fecha::Fecha(int d, int m, int a) : dia_(d), mes_(m), anno_(a)
     correcto();
 }
 
-Fecha::Fecha(const Fecha &f)
-{
-    dia_ = f.dia_;
-    mes_ = f.mes_;
-    anno_ = f.anno_;
-
-    correcto();
-}
-
 void Fecha::correcto(){
     int DIA_S[12]={31,28,31,30,31,30,31,31,30,31,30,31};
     if(anno_ < AnnoMinimo || anno_ > AnnoMaximo){
@@ -64,12 +55,12 @@ void Fecha::correcto(){
 
 Fecha::Invalida::Invalida(const char *f):cad(f){}
 
-const char *Fecha::Invalida::por_que(){
+const char *Fecha::Invalida::por_que() const{
     return cad;
 }
 
 Fecha& Fecha::operator+=(int n){
-    if(n==0){
+    if(n!=0){
         std::tm *time_tm = new std::tm{
             .tm_mday = (dia_ + n), .tm_mon = (mes_ -1), .tm_year = (anno_ - 1900)
         };
@@ -98,10 +89,6 @@ int Fecha::anno() const noexcept{
 
 Fecha& Fecha::operator-=(int n){
     return *this += (-n);
-}
-
-Fecha& Fecha::operator+=(int n){
-    return *this += (n);
 }
 
 Fecha Fecha::operator-(int n) const{
@@ -172,7 +159,7 @@ bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{
 }
 
 const char *Fecha::fecha_cadena() const{
-    struct tm * timeinfo;
+    struct tm * timeinfo{0};
     timeinfo->tm_year = this->anno() - 1900;
     timeinfo->tm_mon = this->mes() - 1;
     timeinfo->tm_mday = this->dia();
@@ -185,4 +172,8 @@ const char *Fecha::fecha_cadena() const{
     std::strftime(cadena, 40, "%A %d de %B de %Y",timeinfo); // ES CORRECTA?
     
     return cadena;
+}
+
+Fecha::operator const char*() const{
+    return fecha_cadena();
 }
