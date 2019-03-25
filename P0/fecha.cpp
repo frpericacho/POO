@@ -42,21 +42,14 @@ void Fecha::correcto() const{
     if(mes_ < 1 || mes_ > 12){
         throw Invalida("error por el mes");
     }
-    if(anno_ % 4 == 0 && (anno_ % 100 != 0 || anno_ % 400 == 0)){
-        if(mes_ == 1)
-            if(dia_ < 1 || dia_ >= 30)
-                throw Invalida("error por el dia");
+    if((anno_ % 4 == 0 && (anno_ % 100 != 0 || anno_ % 400 == 0)) && mes_ == 1){
+        if(dia_ < 1 || dia_ > 29)
+            throw Invalida("error por el dia bisiesto");
     }else{
         if(dia_ < 1 || dia_ > DIA_S[mes_]){
             throw Invalida("error por el dia");
         }
     }
-}
-
-Fecha::Invalida::Invalida(const char *f):cad(f){}
-
-const char *Fecha::Invalida::por_que() const{
-    return cad;
 }
 
 Fecha& Fecha::operator+=(int n){

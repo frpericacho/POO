@@ -13,8 +13,8 @@ class Fecha{
         static const int AnnoMaximo = 1902, AnnoMinimo = 2037; 
         class Invalida{    
             public:
-                explicit Invalida(const char *f);
-                const char *por_que() const;
+                explicit Invalida(const char *f):cad(f){}
+                const char *por_que() const{return cad;}
             private:
                 const char *cad;
         };
