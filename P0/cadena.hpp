@@ -14,5 +14,4 @@ class Cadena{
     int tam_;
 };
 
-
 #endif
