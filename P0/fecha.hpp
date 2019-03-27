@@ -11,6 +11,7 @@ class Fecha{
         explicit Fecha(int d = 0,int m = 0,int a = 0); 
         Fecha(const char *);  
         static const int AnnoMinimo = 1902, AnnoMaximo = 2037; 
+        
         class Invalida{    
             public:
                 explicit Invalida(const char *f):cad(f){}
@@ -18,9 +19,10 @@ class Fecha{
             private:
                 const char *cad;
         };
-        int dia() const noexcept;
-        int mes() const noexcept;
-        int anno() const noexcept;  
+        
+        int dia() const;
+        int mes() const;
+        int anno() const;  
         Fecha &operator=(const Fecha &) = default; 
         Fecha &operator+=(int );   
         Fecha &operator-=(int );   
@@ -36,10 +38,10 @@ class Fecha{
         void correcto() const;   
         int dia_,mes_,anno_;   
 };
-    bool operator<(const Fecha &,const Fecha &) noexcept;  
-    bool operator==(const Fecha &,const Fecha &) noexcept; 
-    bool operator!=(const Fecha &,const Fecha &) noexcept; 
-    bool operator>(const Fecha &,const Fecha &) noexcept;  
-    bool operator<=(const Fecha &,const Fecha &) noexcept; 
-    bool operator>=(const Fecha &,const Fecha &) noexcept; 
+    bool operator<(const Fecha &,const Fecha &);  
+    bool operator==(const Fecha &,const Fecha &); 
+    bool operator!=(const Fecha &,const Fecha &); 
+    bool operator>(const Fecha &,const Fecha &);  
+    bool operator<=(const Fecha &,const Fecha &); 
+    bool operator>=(const Fecha &,const Fecha &); 
 #endif

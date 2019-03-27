@@ -30,12 +30,15 @@ class Fecha{
         Fecha operator++(int );   
         Fecha &operator--() ;  
         Fecha &operator++();   
-        operator const char*() const;
+        //operator const char*() const;
+        const char* cadena() const;
         ~Fecha() = default;
     private:
         void correcto() const;   
         int dia_,mes_,anno_;   
 };
+    std::ostream& operator<<(ostream&, const Fecha &);
+    std::istream& operator>>(istream&, const Fecha &);
     bool operator<(const Fecha &,const Fecha &) noexcept;  
     bool operator==(const Fecha &,const Fecha &) noexcept; 
     bool operator!=(const Fecha &,const Fecha &) noexcept; 

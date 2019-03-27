@@ -145,7 +145,7 @@ bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{//mal
     return !(f1 < f2);
 }
 
-Fecha::operator const char*() const{
+/*Fecha::operator const char*() const{
     char* s = new char[40];
     setlocale(LC_TIME, "");
     tm f = {};
@@ -155,5 +155,21 @@ Fecha::operator const char*() const{
     mktime(&f);
     strftime(s, 40, "%A %d de %B de %Y", &f);
     return s;
-    //return cadena();
+}*/
+
+const char* Fecha::cadena() const{
+    char* s = new char[40];
+    setlocale(LC_TIME, "");
+    tm f = {};
+    f.tm_mday = dia_;
+    f.tm_mon = mes_ - 1;
+    f.tm_year = anno_ - 1900;
+    mktime(&f);
+    strftime(s, 40, "%A %d de %B de %Y", &f);
+    return s;
+}
+
+std::ostream& operator<<(ostream& out, const Fecha &f){
+    out << f.cadena();
+    return out;
 }
