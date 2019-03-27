@@ -37,8 +37,6 @@ class Fecha{
         void correcto() const;   
         int dia_,mes_,anno_;   
 };
-    std::istream &operator>>(std::istream &in, Fecha &f);  //
-    std::ostream &operator<<(std::ostream &out, const Fecha &f) noexcept;  //
     bool operator<(const Fecha &,const Fecha &) noexcept;  //
     bool operator==(const Fecha &,const Fecha &) noexcept; //
     bool operator!=(const Fecha &,const Fecha &) noexcept; //

@@ -29,7 +29,7 @@ fecha_check: fecha_check.cpp
 ${EXE}: fecha.o test-P0-consola.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-${AUTO}: test-caso0-fecha-auto.o test-auto.o fecha.o #cadena.o test-caso0-cadena-auto.o
+${AUTO}: test-caso0-fecha-auto.o test-auto.o fecha.o cadena.o test-caso0-cadena-auto.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
 
 $(OBJ): $(SRC)

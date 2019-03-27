@@ -103,7 +103,7 @@ int main()
   cout << "\", y la 2ª: \"" << f2 << "\"." << endl; 
 
 // ----------------  Cadena  --------------------------------
-/*
+
 // Prueba de constructores
 Cadena s1(20, '['), s2(20, ']'),
     c1(" !Bravo "), c2("a "), c3("todos "),
@@ -149,5 +149,5 @@ Cadena s1(20, '['), s2(20, ']'),
     // Prueba de longitud
     cout << "La cadena a tiene  5 caracteres: " << (nuevo.length() == 5)
 	 << "\nLa cadena b tiene 21 caracteres: " << (grande.length() == 21)
-	 << endl;*/
+	 << endl;
 } // ~

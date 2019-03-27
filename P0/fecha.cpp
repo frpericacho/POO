@@ -111,26 +111,6 @@ Fecha Fecha::operator++(int) {
     return tmp;
 }
 
-std::ostream &operator<<(std::ostream &out, const Fecha &f) noexcept{
-    out << f.cadena();
-    return out;
-}
-
-std::istream &operator>>(std::istream &in, Fecha &f){
-    char t[11];
-    in.getline(t,11);
-    try
-    {
-        f = Fecha(t);
-    }
-    catch(const Fecha::Invalida &e)
-    {
-        in.setstate(std::ios_base::failbit);
-        throw;
-    }
-    return in;
-}
-
 bool operator==(const Fecha &f1, const Fecha &f2) noexcept{
     if(f1.dia() == f2.dia() && f1.mes() == f2.mes() && f1.anno() == f2.anno())
         return true;
