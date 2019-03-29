@@ -173,3 +173,18 @@ std::ostream& operator<<(ostream& out, const Fecha &f){
     out << f.cadena();
     return out;
 }
+
+std::istream& operator>>(istream& in, const Fecha &f){
+    char aux[11];
+    in.getline(aux,11);
+    try
+    {
+        
+    }
+    catch(const Fecha::Invalida &e)
+    {
+        in.setstate(std::ios_base::failbit);
+        throw;
+    }
+    return in;
+}
