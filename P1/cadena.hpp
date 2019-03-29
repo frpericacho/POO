@@ -9,7 +9,6 @@ class Cadena
     Cadena(const Cadena &);
     Cadena(const char *);
     Cadena(const char *, size_t );
-    Cadena(const Cadena &, size_t, size_t n = npos);
     static const size_t npos = -1;
     size_t length() const;
     const char &at(size_t ) const;
@@ -20,14 +19,15 @@ class Cadena
     char &operator[](size_t );
     Cadena &operator=(const Cadena &);
     Cadena &operator+=(const Cadena &);
-    Cadena substr(size_t, size_t ) const;
-
+    Cadena substr(size_t begindex, size_t len) const;
     ~Cadena();
   private:
     char *s_;
     size_t tam_;
 };
 
+std::ostream& operator<<(ostream&, const Cadena &);
+std::istream& operator>>(istream&, Cadena &);
 Cadena operator+(const Cadena &, const Cadena &);
 bool operator<(const Cadena &, const Cadena &);
 bool operator>(const Cadena &, const Cadena &);

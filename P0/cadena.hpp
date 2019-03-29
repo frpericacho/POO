@@ -9,7 +9,6 @@ class Cadena{
     Cadena(const Cadena &);
     Cadena(const char *);
     Cadena(const char *, size_t );
-    Cadena(const Cadena &, size_t , size_t n = npos);
     static const size_t npos = -1;
     Cadena &operator=(const Cadena &);
     operator const char *() const;
@@ -19,8 +18,8 @@ class Cadena{
     char &at(size_t );
     const char &operator[](size_t ) const;
     char &operator[](size_t );
-    Cadena substr(size_t , size_t ) const;
-
+    //Cadena substr(size_t , size_t ) const;
+    Cadena substr(size_t begindex, size_t len) const;
     ~Cadena();
   private:
     char *s_;

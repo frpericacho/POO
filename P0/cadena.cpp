@@ -33,17 +33,6 @@ Cadena::Cadena(const char *s, size_t n) : tam_(n){
     s_[tam_] = '\0';
 }
 
-Cadena::Cadena(const Cadena &cad, size_t index, size_t n) : tam_(n){
-    if (index > cad.tam_ - 1)
-        throw std::out_of_range("Error: Indice fuera de rango...");
-    if (n == Cadena::npos || n > cad.tam_ - index)
-        tam_ = cad.tam_ - index;
-    s_ = new char[tam_ + 1];
-    for (size_t i = 0; i < tam_; i++)
-        s_[i] = cad.s_[i + index];
-    s_[tam_] = '\0';
-}
-
 Cadena::~Cadena(){ 
     delete[] s_; 
 }
@@ -125,8 +114,16 @@ char &Cadena::operator[](size_t index){
     return s_[index]; 
 }
 
-Cadena Cadena::substr(size_t index, size_t n) const{
-    if (index >= tam_ || n > tam_ - index)
-        throw std::out_of_range("Error: Indice fuera de rango...");
-    return Cadena(*this, index, n);
+Cadena Cadena::substr(size_t begindex, size_t len) const
+{
+    if (begindex >= this->length() || begindex + len > this->length() ||
+        begindex + len < begindex)
+        throw std::out_of_range("Error de rango");
+
+    char *tmp = new char[len + 1];
+    std::strncpy(tmp, s_ + begindex, len);
+    tmp[len] = '\0';
+    Cadena ctmp(tmp);
+    delete[] tmp;
+    return ctmp;
 }

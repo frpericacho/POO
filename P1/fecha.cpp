@@ -4,19 +4,19 @@
 #include "fecha.hpp"
 #define BISIESTO (anno_ % 4 == 0 && (anno_ % 400 == 0 || anno_ % 100 != 0)) && mes_ == 2
 
-Fecha::Fecha(const char* f): dia_(0), mes_(0), anno_(0)
-{   
+Fecha::Fecha(const char *f) : dia_(0), mes_(0), anno_(0)
+{
     time_t tiempo_calendario = time(nullptr);
-    tm *tiempo_descompuesto = localtime(&tiempo_calendario);                                                
-    
-    if((sscanf(f,"%d/%d/%d", &dia_,&mes_,&anno_)) != 3)
+    tm *tiempo_descompuesto = localtime(&tiempo_calendario);
+
+    if ((sscanf(f, "%d/%d/%d", &dia_, &mes_, &anno_)) != 3)
         throw Invalida("error en la fecha");
-    
-    if(dia_ == 0)
+
+    if (dia_ == 0)
         dia_ = tiempo_descompuesto->tm_mday;
-    if(Fecha::mes_ == 0)
+    if (Fecha::mes_ == 0)
         mes_ = tiempo_descompuesto->tm_mon + 1;
-    if(Fecha::anno_ == 0)
+    if (Fecha::anno_ == 0)
         anno_ = tiempo_descompuesto->tm_year + 1900;
 
     correcto();
@@ -36,11 +36,14 @@ Fecha::Fecha(int d, int m, int a) : dia_(d), mes_(m), anno_(a)
     correcto();
 }
 
-void Fecha::correcto() const{
-    if(anno_ < Fecha::AnnoMinimo || anno_ > Fecha::AnnoMaximo){
+void Fecha::correcto() const
+{
+    if (anno_ < Fecha::AnnoMinimo || anno_ > Fecha::AnnoMaximo)
+    {
         throw Invalida("error por el año");
     }
-    if(mes_ < 1 || mes_ > 12){
+    if (mes_ < 1 || mes_ > 12)
+    {
         throw Invalida("error por el mes");
     }
 
@@ -49,12 +52,13 @@ void Fecha::correcto() const{
         throw Invalida("Dia Incorrecto");
 }
 
-Fecha& Fecha::operator+=(int n){
-    if(n!=0){
+Fecha &Fecha::operator+=(int n)
+{
+    if (n != 0)
+    {
         std::tm *time_tm = new std::tm{
-            0, 0, 0, (dia_ + n), (mes_ -1), (anno_ - 1900), 0, 0, 0, 0, 0
-        };
-        
+            0, 0, 0, (dia_ + n), (mes_ - 1), (anno_ - 1900), 0, 0, 0, 0, 0};
+
         std::mktime(time_tm);
 
         dia_ = time_tm->tm_mday;
@@ -67,81 +71,97 @@ Fecha& Fecha::operator+=(int n){
     return *this;
 }
 
-int Fecha::dia() const noexcept{
+int Fecha::dia() const noexcept
+{
     return dia_;
 }
 
-int Fecha::mes() const noexcept{
+int Fecha::mes() const noexcept
+{
     return mes_;
 }
 
-int Fecha::anno() const noexcept{
+int Fecha::anno() const noexcept
+{
     return anno_;
 }
 
-Fecha& Fecha::operator-=(int n){
+Fecha &Fecha::operator-=(int n)
+{
     return *this += (-n);
 }
 
-Fecha Fecha::operator-(int n) const{
+Fecha Fecha::operator-(int n) const
+{
     return Fecha(*this) += (-n);
 }
 
-Fecha Fecha::operator+(int n) const{
+Fecha Fecha::operator+(int n) const
+{
     return Fecha(*this) += n;
 }
 
-Fecha& Fecha::operator--(){
+Fecha &Fecha::operator--()
+{
     return *this -= 1;
 }
 
-Fecha& Fecha::operator++(){
+Fecha &Fecha::operator++()
+{
     return *this += 1;
 }
 
-Fecha Fecha::operator--(int) {
+Fecha Fecha::operator--(int)
+{
     Fecha tmp = *this;
     *this -= 1;
     return tmp;
 }
 
-Fecha Fecha::operator++(int) {
+Fecha Fecha::operator++(int)
+{
     Fecha tmp = *this;
     *this += 1;
     return tmp;
 }
 
-bool operator==(const Fecha &f1, const Fecha &f2) noexcept{
-    if(f1.dia() == f2.dia() && f1.mes() == f2.mes() && f1.anno() == f2.anno())
+bool operator==(const Fecha &f1, const Fecha &f2) noexcept
+{
+    if (f1.dia() == f2.dia() && f1.mes() == f2.mes() && f1.anno() == f2.anno())
         return true;
     else
         return false;
 }
 
-bool operator<(const Fecha &f1, const Fecha &f2) noexcept{
-    if(f1.anno() < f2.anno())
+bool operator<(const Fecha &f1, const Fecha &f2) noexcept
+{
+    if (f1.anno() < f2.anno())
         return true;
-    if(f1.anno() == f2.anno() && f1.mes() < f2.mes())
+    if (f1.anno() == f2.anno() && f1.mes() < f2.mes())
         return true;
-    if(f1.anno() == f2.anno() && f1.mes() == f2.mes() && f1.dia() < f2.dia())
+    if (f1.anno() == f2.anno() && f1.mes() == f2.mes() && f1.dia() < f2.dia())
         return true;
-    else 
+    else
         return false;
 }
 
-bool operator!=(const Fecha &f1, const Fecha &f2) noexcept{
+bool operator!=(const Fecha &f1, const Fecha &f2) noexcept
+{
     return !(f1 == f2);
 }
 
-bool operator>(const Fecha &f1, const Fecha &f2) noexcept{
+bool operator>(const Fecha &f1, const Fecha &f2) noexcept
+{
     return f2 < f1;
 }
 
-bool operator<=(const Fecha &f1, const Fecha &f2) noexcept{//mal
+bool operator<=(const Fecha &f1, const Fecha &f2) noexcept
+{ //mal
     return !(f2 < f1);
 }
 
-bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{//mal
+bool operator>=(const Fecha &f1, const Fecha &f2) noexcept
+{ //mal
     return !(f1 < f2);
 }
 
@@ -157,8 +177,9 @@ bool operator>=(const Fecha &f1, const Fecha &f2) noexcept{//mal
     return s;
 }*/
 
-const char* Fecha::cadena() const{
-    char* s = new char[40];
+const char *Fecha::cadena() const
+{
+    char *s = new char[40];
     setlocale(LC_TIME, "");
     tm f = {};
     f.tm_mday = dia_;
@@ -169,12 +190,14 @@ const char* Fecha::cadena() const{
     return s;
 }
 
-std::ostream& operator<<(ostream& out, const Fecha &f){
+std::ostream &operator<<(ostream &out, const Fecha &f)
+{
     out << f.cadena();
     return out;
 }
 
-std::istream& operator>>(istream& in, Fecha &f){
+std::istream &operator>>(istream &in, Fecha &f)
+{
     char aux[11];
     in.getline(aux,11);
     try
