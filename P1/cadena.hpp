@@ -4,23 +4,23 @@
 class Cadena
 {
   public:
-    explicit Cadena(size_t n, char c = ' ');
+    explicit Cadena(size_t, char c = ' ');
     Cadena();
-    Cadena(const Cadena &cad);
-    Cadena(const char *s);
-    Cadena(const char *s, size_t n);
-    Cadena(const Cadena &cad, size_t indice, size_t n = npos);
+    Cadena(const Cadena &);
+    Cadena(const char *);
+    Cadena(const char *, size_t );
+    Cadena(const Cadena &, size_t, size_t n = npos);
     static const size_t npos = -1;
     size_t length() const;
-    const char &at(size_t indice) const;
-    char &at(size_t indice);
+    const char &at(size_t ) const;
+    char &at(size_t );
     //operator const char *() const;
     const char* c_str() const;
-    const char &operator[](size_t indice) const;
-    char &operator[](size_t indice);
-    Cadena &operator=(const Cadena &cad);
-    Cadena &operator+=(const Cadena &cad);
-    Cadena substr(size_t indice, size_t n) const;
+    const char &operator[](size_t ) const;
+    char &operator[](size_t );
+    Cadena &operator=(const Cadena &);
+    Cadena &operator+=(const Cadena &);
+    Cadena substr(size_t, size_t ) const;
 
     ~Cadena();
   private:
@@ -28,12 +28,12 @@ class Cadena
     size_t tam_;
 };
 
-Cadena operator+(const Cadena &a, const Cadena &b);
-bool operator<(const Cadena &a, const Cadena &b);
-bool operator>(const Cadena &a, const Cadena &b);
-bool operator==(const Cadena &a, const Cadena &b);
-bool operator!=(const Cadena &a, const Cadena &b);
-bool operator<=(const Cadena &a, const Cadena &b);
-bool operator>=(const Cadena &a, const Cadena &b);
+Cadena operator+(const Cadena &, const Cadena &);
+bool operator<(const Cadena &, const Cadena &);
+bool operator>(const Cadena &, const Cadena &);
+bool operator==(const Cadena &, const Cadena &);
+bool operator!=(const Cadena &, const Cadena &);
+bool operator<=(const Cadena &, const Cadena &);
+bool operator>=(const Cadena &, const Cadena &);
 
 #endif 
