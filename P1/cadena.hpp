@@ -1,33 +1,3 @@
-/*#ifndef CADENA_HPP
-#define CADENA_HPP
-#include<iostream>
-
-class Cadena{
-    public:
-        explicit Cadena(size_t tam = 0, char s = ' '); //
-        Cadena(const Cadena&) = default; //
-        Cadena(const char*); //
-        Cadena(Cadena &&);
-        const char* c_str() const;
-        const char& at(size_t ) const;
-        char& at(size_t );
-        Cadena substr(size_t ,size_t ) const;
-        size_t length() const;
-        operator const char*() const;
-        ~Cadena();
-    private:
-        char *s_;
-        size_t tam_;
-};
-
-bool operator==(const Cadena &cad1, const Cadena &cad2);
-bool operator!=(const Cadena &cad1, const Cadena &cad2);
-bool operator>(const Cadena &cad1, const Cadena &cad2);
-bool operator<(const Cadena &cad1, const Cadena &cad2);
-bool operator>=(const Cadena &cad1, const Cadena &cad2);
-bool operator<=(const Cadena &cad1, const Cadena &cad2);
-
-#endif*/
 #ifndef CADENA_HPP_
 #define CADENA_HPP_
 #include <iostream>
