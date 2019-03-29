@@ -11,14 +11,15 @@ class Cadena
     Cadena(const char *s, size_t n);
     Cadena(const Cadena &cad, size_t indice, size_t n = npos);
     static const size_t npos = -1;
-    Cadena &operator=(const Cadena &cad);
-    operator const char *() const;
     size_t length() const;
-    Cadena &operator+=(const Cadena &cad);
     const char &at(size_t indice) const;
     char &at(size_t indice);
+    //operator const char *() const;
+    const char* c_str() const;
     const char &operator[](size_t indice) const;
     char &operator[](size_t indice);
+    Cadena &operator=(const Cadena &cad);
+    Cadena &operator+=(const Cadena &cad);
     Cadena substr(size_t indice, size_t n) const;
 
     ~Cadena();

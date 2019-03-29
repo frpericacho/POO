@@ -57,8 +57,12 @@ Cadena &Cadena::operator=(const Cadena &cad){
     return *this;
 }
 
-Cadena::operator const char *() const{ 
+/*Cadena::operator const char *() const{ 
     return s_; 
+}*/
+
+const char* Cadena::c_str() const{
+    return s_;
 }
 
 size_t Cadena::length() const{ 
@@ -83,7 +87,7 @@ Cadena operator+(const Cadena &a, const Cadena &b){
 }
 
 bool operator<(const Cadena &a, const Cadena &b){
-    return strcmp(a, b) < 0;
+    return strcmp(a.c_str(), b.c_str()) < 0;
 }
 
 bool operator>(const Cadena &a, const Cadena &b){ 
@@ -91,7 +95,7 @@ bool operator>(const Cadena &a, const Cadena &b){
 }
 
 bool operator==(const Cadena &a, const Cadena &b){ 
-    return strcmp(a, b) == 0; 
+    return strcmp(a.c_str(), b.c_str()) == 0; 
 }
 
 bool operator!=(const Cadena &a, const Cadena &b){ 
