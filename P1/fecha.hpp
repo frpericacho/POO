@@ -38,7 +38,7 @@ class Fecha{
         int dia_,mes_,anno_;   
 };
     std::ostream& operator<<(ostream&, const Fecha &);
-    std::istream& operator>>(istream&, const Fecha &);
+    std::istream& operator>>(istream&, Fecha &);
     bool operator<(const Fecha &,const Fecha &) noexcept;  
     bool operator==(const Fecha &,const Fecha &) noexcept; 
     bool operator!=(const Fecha &,const Fecha &) noexcept; 

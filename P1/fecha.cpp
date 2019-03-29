@@ -174,12 +174,12 @@ std::ostream& operator<<(ostream& out, const Fecha &f){
     return out;
 }
 
-std::istream& operator>>(istream& in, const Fecha &f){
+std::istream& operator>>(istream& in, Fecha &f){
     char aux[11];
     in.getline(aux,11);
     try
     {
-        
+        f = Fecha(aux);
     }
     catch(const Fecha::Invalida &e)
     {
