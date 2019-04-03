@@ -23,6 +23,12 @@ Cadena::Cadena(const Cadena &cad) : tam_(cad.tam_)
     strcpy(s_, cad.s_);
 }
 
+Cadena::Cadena(Cadena &&cad): tam_{cad.tam_}, s_{cad.s_}
+{
+    cad.s_ = nullptr;
+    tam_ = 0;
+}
+
 Cadena::Cadena(const char *s) : tam_(strlen(s))
 {
     s_ = new char[tam_ + 1];
@@ -44,12 +50,24 @@ Cadena::~Cadena()
     delete[] s_;
 }
 
-Cadena &Cadena::operator=(const Cadena &cad)
+Cadena& Cadena::operator=(const Cadena &cad)
 {
     tam_ = cad.tam_;
     delete[] s_;
     s_ = new char[tam_ + 1];
     strcpy(s_, cad.s_);
+    return *this;
+}
+
+Cadena& Cadena::operator=(Cadena &&cad)
+{
+    if(this != &cad){
+        delete[] s_;
+        s_ = cad.s_;
+        tam_ = cad.tam_;
+        cad.s_ = nullptr;
+        cad.tam_ = 0;
+    }
     return *this;
 }
 
@@ -67,7 +85,7 @@ size_t Cadena::length() const
     return tam_;
 }
 
-Cadena &Cadena::operator+=(const Cadena &cad)
+Cadena& Cadena::operator+=(const Cadena &cad)
 {
     char *aux = new char[tam_ + 1];
     strcpy(aux, s_);
@@ -144,11 +162,11 @@ Cadena Cadena::substr(size_t index, size_t n) const
 {
     if (index >= this->length() || index + n > this->length() || index + n < index)
         throw std::out_of_range("fuera de rango");
-   
+
     char *aux = new char[n + 1];
     std::strncpy(aux, s_ + index, n);
     aux[n] = '\0';
-    
+
     Cadena cad(aux);
     delete[] aux;
 
