@@ -183,17 +183,17 @@ std::istream &operator>>(istream &in, Cadena &cad)
 {
     char *aux = new char[32];
     size_t cont = 0;
-    char a;
+    //char a;
     
-    while(in.good() && isspace(in.get()));
-    in.unget();
-
-    while(in.good() && !isspace(in.peek()) && cont < 31){
-        a = in.get();
-        if(in.good())
-            aux[cont++] = a;
-    }
-    aux[cont] = '\0';
+    while(in.good() && isspace(in.get()));  //Buscar el inicio de la cadena
+    in.unget();                             //
+    
+    while(in.good() && !isspace(in.peek()) && cont < 31){   //recorro la cadena hasta el final o hasta un espacio
+        //a = in.get();
+        if(in.good())       //esto es necesario?? ya se ha comprobado arriba
+            aux[cont++] = in.get(); // = a; //el cont++ es para usar la posicion actual del cont 
+    }                               //y se incremente en la proxima iteracion al es un postincremento
+    aux[cont] = '\0';       
 
     if(in.good() && in.peek() != ' ')
         in.ignore();
