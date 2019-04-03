@@ -182,9 +182,22 @@ std::ostream &operator<<(ostream &out, const Cadena &cad)
 std::istream &operator>>(istream &in, Cadena &cad)
 {
     char *aux = new char[32];
-    in >> aux;
-    Cadena nueva(aux);
-    delete[] aux;
-    cad = nueva;
+    size_t cont = 0;
+    char a;
+    
+    while(in.good() && isspace(in.get()));
+    in.unget();
+
+    while(in.good() && !isspace(in.peek()) && cont < 31){
+        a = in.get();
+        if(in.good())
+            aux[cont++] = a;
+    }
+    aux[cont] = '\0';
+
+    if(in.good() && in.peek() != ' ')
+        in.ignore();
+    
+    cad = Cadena(aux);
     return in;
 }
