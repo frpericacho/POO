@@ -23,7 +23,7 @@ Cadena::Cadena(const Cadena &cad) : tam_(cad.tam_)
     strcpy(s_, cad.s_);
 }
 
-Cadena::Cadena(Cadena &&cad) : tam_{cad.tam_}, s_{cad.s_}
+Cadena::Cadena(Cadena &&cad) : s_{cad.s_}, tam_{cad.tam_}
 {
     cad.s_ = nullptr;
     tam_ = 0;
@@ -182,20 +182,20 @@ std::ostream &operator<<(ostream &out, const Cadena &cad)
 
 std::istream &operator>>(istream &in, Cadena &cad)
 {
-    char *aux = new char[32];
+    char *aux = new char[33];
     size_t cont = 0;
-    //char a;
+    char a;
 
-    while (in.good() && isspace(in.get()))
-        ;       //Buscar el inicio de la cadena
+    while (in.good() && isspace(in.get()));       //Buscar el inicio de la cadena
     in.unget(); //
 
-    while (in.good() && !isspace(in.peek()) && cont < 31)
+    while (in.good() && !isspace(in.peek()) && cont < 32)
     { //recorro la cadena hasta el final o hasta un espacio
         //a = in.get();
         if (in.good())              //esto es necesario?? ya se ha comprobado arriba
-            aux[cont++] = in.get(); // = a; //el cont++ es para usar la posicion actual del cont
-    }                               //y se incremente en la proxima iteracion al es un postincremento
+            aux[cont++] = in.get(); // = in.get(); //el cont++ es para usar la posicion actual del cont
+                             //y se incremente en la proxima iteracion al es un postincremento
+    }                               
     aux[cont] = '\0';
 
     if (in.good() && in.peek() != ' ')
