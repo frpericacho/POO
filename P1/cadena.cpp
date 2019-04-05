@@ -184,7 +184,7 @@ std::istream &operator>>(istream &in, Cadena &cad)
 {
     char *aux = new char[33];
     size_t cont = 0;
-    char a;
+    //char a;
 
     while (in.good() && isspace(in.get()));       //Buscar el inicio de la cadena
     in.unget(); //
