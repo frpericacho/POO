@@ -23,7 +23,7 @@ Cadena::Cadena(const Cadena &cad) : tam_(cad.tam_)
     strcpy(s_, cad.s_);
 }
 
-Cadena::Cadena(Cadena &&cad): tam_{cad.tam_}, s_{cad.s_}
+Cadena::Cadena(Cadena &&cad) : tam_{cad.tam_}, s_{cad.s_}
 {
     cad.s_ = nullptr;
     tam_ = 0;
@@ -50,7 +50,7 @@ Cadena::~Cadena()
     delete[] s_;
 }
 
-Cadena& Cadena::operator=(const Cadena &cad)
+Cadena &Cadena::operator=(const Cadena &cad)
 {
     tam_ = cad.tam_;
     delete[] s_;
@@ -59,9 +59,10 @@ Cadena& Cadena::operator=(const Cadena &cad)
     return *this;
 }
 
-Cadena& Cadena::operator=(Cadena &&cad)
+Cadena &Cadena::operator=(Cadena &&cad)
 {
-    if(this != &cad){
+    if (this != &cad)
+    {
         delete[] s_;
         s_ = cad.s_;
         tam_ = cad.tam_;
@@ -85,7 +86,7 @@ size_t Cadena::length() const
     return tam_;
 }
 
-Cadena& Cadena::operator+=(const Cadena &cad)
+Cadena &Cadena::operator+=(const Cadena &cad)
 {
     char *aux = new char[tam_ + 1];
     strcpy(aux, s_);
@@ -184,20 +185,22 @@ std::istream &operator>>(istream &in, Cadena &cad)
     char *aux = new char[32];
     size_t cont = 0;
     //char a;
-    
-    while(in.good() && isspace(in.get()));  //Buscar el inicio de la cadena
-    in.unget();                             //
-    
-    while(in.good() && !isspace(in.peek()) && cont < 31){   //recorro la cadena hasta el final o hasta un espacio
-        //a = in.get();
-        if(in.good())       //esto es necesario?? ya se ha comprobado arriba
-            aux[cont++] = in.get(); // = a; //el cont++ es para usar la posicion actual del cont 
-    }                               //y se incremente en la proxima iteracion al es un postincremento
-    aux[cont] = '\0';       
 
-    if(in.good() && in.peek() != ' ')
+    while (in.good() && isspace(in.get()))
+        ;       //Buscar el inicio de la cadena
+    in.unget(); //
+
+    while (in.good() && !isspace(in.peek()) && cont < 31)
+    { //recorro la cadena hasta el final o hasta un espacio
+        //a = in.get();
+        if (in.good())              //esto es necesario?? ya se ha comprobado arriba
+            aux[cont++] = in.get(); // = a; //el cont++ es para usar la posicion actual del cont
+    }                               //y se incremente en la proxima iteracion al es un postincremento
+    aux[cont] = '\0';
+
+    if (in.good() && in.peek() != ' ')
         in.ignore();
-    
+
     cad = Cadena(aux);
     return in;
 }
