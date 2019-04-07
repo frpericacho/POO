@@ -183,24 +183,19 @@ std::ostream &operator<<(ostream &out, const Cadena &cad)
 std::istream &operator>>(istream &in, Cadena &cad)
 {
     char *aux = new char[33];
-    size_t cont = 0;
-    //char a;
+    int cont = 0;
 
-    while (in.good() && isspace(in.get()));       //Buscar el inicio de la cadena
-    in.unget(); //
+    while (in.good() && isspace(in.get()));
+    in.unget();
 
-    while (in.good() && !isspace(in.peek()) && cont < 32)
-    { //recorro la cadena hasta el final o hasta un espacio
-        //a = in.get();
-        if (in.good())              //esto es necesario?? ya se ha comprobado arriba
-            aux[cont++] = in.get(); // = in.get(); //el cont++ es para usar la posicion actual del cont
-                             //y se incremente en la proxima iteracion al es un postincremento
-    }                               
+    while (in.good() && !isspace(in.peek()) && cont < 32 && in.peek() != '\n' && in.peek() != '\0')
+    {
+        if (in.good())
+            aux[cont++] = in.get();
+    }
     aux[cont] = '\0';
 
-    if (in.good() && in.peek() != ' ')
-        in.ignore();
-
-    cad = Cadena(aux);
+    cad = aux;
+    delete[] aux;
     return in;
 }
