@@ -23,10 +23,10 @@ Cadena::Cadena(const Cadena &cad) : tam_(cad.tam_)
     strcpy(s_, cad.s_);
 }
 
-Cadena::Cadena(Cadena &&cad) : s_{cad.s_}, tam_{cad.tam_}
+Cadena::Cadena(Cadena &&cad) : s_(cad.s_), tam_(cad.tam_)
 {
-    cad.s_ = nullptr;
-    tam_ = 0;
+    cad.s_ = 0;
+    cad.tam_ = 0;
 }
 
 Cadena::Cadena(const char *s) : tam_(strlen(s))
