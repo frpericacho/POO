@@ -1,6 +1,8 @@
 #include "cadena.hpp"
 #include <cstring>
 #include <stdexcept>
+#include <iterator>
+
 using namespace std;
 
 Cadena::Cadena(size_t n, char c) : tam_(n)
