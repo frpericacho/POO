@@ -2,38 +2,38 @@
 #include "cadena.hpp"
 #include "fecha.hpp"
 
-articulo::articulo(Cadena ref,Cadena til,Fecha publi,double precio,unsigned stck):referencia_(ref), 
+Articulo::Articulo(Cadena ref,Cadena til,Fecha publi,double precio,unsigned stck):referencia_(ref), 
         titulo_(til),f_publi_(publi),precio_(precio),stock_(stck){}
 
-Cadena articulo::referencia() const{
+Cadena Articulo::referencia() const{
     return referencia_;
 }
 
-Cadena articulo::titulo() const{
+Cadena Articulo::titulo() const{
     return titulo_;
 }
 
-Fecha articulo::f_publi() const{
+Fecha Articulo::f_publi() const{
     return f_publi_;
 }
 
-unsigned articulo::stock() const{
+unsigned Articulo::stock() const{
     return stock_;
 }
 
-unsigned& articulo::stock(){
+unsigned& Articulo::stock(){
     return stock_;
 }
 
-double articulo::precio() const{
+double Articulo::precio() const{
     return precio_;
 }
 
-double& articulo::precio(){
+double& Articulo::precio(){
     return precio_;
 }
 
-std::ostream &operator<<(std::ostream &os, const articulo &art){
+std::ostream &operator<<(std::ostream &os, const Articulo &art){
     os << "[" << art.referencia() << "] " <<  art.titulo() << " , " 
         << art.f_publi() << " , " << art.precio(); 
     return os;

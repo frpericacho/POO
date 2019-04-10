@@ -4,9 +4,9 @@
 #include "cadena.hpp"
 #include "fecha.hpp"
 
-class articulo{
+class Articulo{
     public:
-        articulo(Cadena ,Cadena ,Fecha ,double ,unsigned );
+        Articulo(Cadena ,Cadena ,Fecha ,double ,unsigned );
         Cadena referencia() const;
         Cadena titulo() const;
         Fecha f_publi() const;
@@ -22,6 +22,6 @@ class articulo{
         unsigned stock_;
 };
 
-std::ostream &operator<<(std::ostream &, const articulo &);
+std::ostream &operator<<(std::ostream &, const Articulo &);
 
 #endif
