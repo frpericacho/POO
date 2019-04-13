@@ -14,9 +14,9 @@ Fecha::Fecha(const char* f): dia_(0), mes_(0), anno_(0)
     
     if(dia_ == 0)
         dia_ = tiempo_descompuesto->tm_mday;
-    if(Fecha::mes_ == 0)
+    if(mes_ == 0)
         mes_ = tiempo_descompuesto->tm_mon + 1;
-    if(Fecha::anno_ == 0)
+    if(anno_ == 0)
         anno_ = tiempo_descompuesto->tm_year + 1900;
 
     correcto();
@@ -155,5 +155,4 @@ Fecha::operator const char*() const{
     mktime(&f);
     strftime(s, 40, "%A %d de %B de %Y", &f);
     return s;
-    //return cadena();
 }

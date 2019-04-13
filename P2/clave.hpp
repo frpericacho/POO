@@ -10,11 +10,16 @@ class Clave{
         
         class Incorrecta{
             public:
-                Razon razon() const;
+                Incorrecta(Razon r):r_(r){}
+                Razon razon() const{
+                    return r_;
+                }
+            private:
+                Razon r_;
         };
         
         Cadena clave() const;
-        bool verifica(const char* );
+        bool verifica(const char* ) const;
     private:
         Cadena clave_;
 };
