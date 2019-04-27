@@ -109,8 +109,8 @@ std::ostream &mostrar_carro(std::ostream &os, const Usuario &user)
     os << "Carrito de compra de " << user.id() << "[Articulos: " << user.n_articulos() << "]"
        << "\n"
        << "Cant.Articulo" << std::endl
-       << std::setw(95) << std::setfill("=") << "\n"
-       << std::setfill(" ");
+       << std::setw(95) << std::setfill('=') << "\n"
+       << std::setfill(' ');
 
     int cant = user.n_articulos();
 
@@ -128,3 +128,18 @@ std::ostream &mostrar_carro(std::ostream &os, const Usuario &user)
     }
     return os;
 }
+
+/*
+ostream &mostrar_carro(ostream &os, const Usuario &user)
+{
+    os << "Carritodecomprade" << user.id() << "[Artículos:" << user.n_articulos() << "]" << endl;
+    os << "Cant.Artículo" << endl;
+    os << "==================================================" << endl;
+    Usuario::Articulos::const_iterator iter = user.compra().begin();
+    while (iter != user.compra().end())
+    {
+        os << "" << iter->second << "" << *iter->first << endl;
+        iter++;
+    }
+    return os;
+}*/
