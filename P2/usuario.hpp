@@ -72,14 +72,18 @@ public:
     Cadena nombre() const;
     Cadena apellidos() const;
     Cadena direccion() const;
+    void compra(Articulo &, unsigned cant = 1);
     const Tarjetas &tarjetas() const { 
         return t_; 
     }
-    void compra(Articulo &, unsigned cant = 1);
     const Articulos &compra() const{
         return art_;
     };
-    size_t n_articulos() const;
+    size_t n_articulos() const{
+        return art_.size();
+    }
+
+    friend std::ostream &operator << (std::ostream &os, const Usuario &user);
 
     ~Usuario();
 
@@ -90,5 +94,7 @@ private:
     Tarjetas t_;
     Articulos art_;
 };
+
+    std::ostream &mostrar_carro(std::ostream &os, const Usuario &user);
 
 #endif
