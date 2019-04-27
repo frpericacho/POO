@@ -1,20 +1,53 @@
 #include <iostream>
 #include "usuario.hpp"
+#include "cadena.hpp"
+#include <cstring>
+#include <unistd.h>
+#include <cstdlib>
+#include <crypt.h>
 
-Usuario::Id_duplicado::Id_duplicado(const Cadena &cad) : id_(cad) {}
-
-Cadena Usuario::Id_duplicado::idd() const
-{
-    return id_;
+Clave::Clave(const char* cad){
+    if(strlen(cad) < 5)
+        Incorrecta(Clave::CORTA);
+    const char* c ="abcdefg";
+    char salt[2];
+    salt[0] = c[rand() % 7];
+    salt[1] = c[rand() % 7];
+    if(crypt(cad,salt) == nullptr)
+        throw Incorrecta(Clave::ERROR_CRYPT);
+    clave_ = crypt(cad,salt);
 }
 
-Usuario::Usuario(const Cadena &id, const Cadena &nomb, const Cadena &apell, const Cadena &dir, const Clave &clv) : identificador_(id), nombre_(nomb), apellidos_(apell), dirección_(dir), clave_(clv) {}
+const Cadena& Clave::clave() const{
+    return clave_;
+} 
 
-void Usuario::es_titular_de(Tarjeta &){
-
+bool Clave::verifica(const char* cad) const{
+    return clave_ == crypt(cad, clave_.c_str());
 }
-void Usuario::no_es_titular_de(Tarjeta &){
 
+Usuario::Usuario(const Cadena &id, const Cadena &nomb, const Cadena &apell, const Cadena &dir, const Clave &clv) : 
+identificador_(id), nombre_(nomb), apellidos_(apell), direccion_(dir), clave_(clv) {
+    if(!user_.insert(id).second)
+        throw Id_duplicado(identificador_);
+}
+
+void Usuario::es_titular_de(Tarjeta &t){
+    if(this == t.titular()){
+        t_.insert(std::make_pair(t.numero(),&t));
+    }
+}
+
+void Usuario::no_es_titular_de(Tarjeta &t){
+    t.anula_titular();
+    t_.erase(t.numero());
+}
+
+void Usuario::compra(Articulo &art, unsigned cant){
+    if(cant == 0)
+        art_.erase(&art);
+    else
+        art_[&art] = cant;
 }
 
 Cadena Usuario::id() const{
@@ -30,20 +63,16 @@ Cadena Usuario::apellidos() const{
 }
 
 Cadena Usuario::direccion() const{
-    return dirección_;
-}
-
-//const Tarjeta &tarjetas() const{          HAY QUE PONER LAS TARJETAS
-//  return t_;
-//}          
-void Usuario::compra(Articulo &, unsigned){
-
-}
-
-const Articulo &Usuario::compra() const{
-
+    return direccion_;
 }
 
 size_t Usuario::n_articulos() const{
 
+}
+
+Usuario::~Usuario(){
+    for(auto i = t_.begin; i != t_.end(); i++){
+        i->second->anula_titular();
+    }
+    user_.erase(identificador_);
 }
