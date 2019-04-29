@@ -93,14 +93,21 @@ Usuario::~Usuario()
 
 std::ostream &operator<<(std::ostream &os, const Usuario &user)
 {
-    os << user.identificador_ << "[" << user.clave_.clave().c_str() << "]" << user.nombre_ << user.apellidos_ << "\n"
-       << user.direccion_ << std::endl;
-    os << "Tarjetas:";
-    for (auto i = user.tarjetas().begin(); i != user.tarjetas().end(); i++)
-    {
-        os << *i->second << std::endl;
-    }
+    // os << user.identificador_ << "[" << user.clave_.clave().c_str() << "]" << user.nombre_ << user.apellidos_ << "\n"
+    //    << user.direccion_ << std::endl;
+    // os << "Tarjetas:";
+    // for (auto i = user.tarjetas().begin(); i != user.tarjetas().end(); i++)
+    // {
+    //     os << *i->second << std::endl;
+    // }
 
+    // return os;
+    os << user.identificador_ << "[" << user.clave_.clave().c_str() << "]"
+       << user.nombre_ << user.apellidos_ << std::endl
+       << user.direccion_ << std::endl
+       << "Tarjetas:" << std::endl;
+    for (const auto &[numero, tarjeta] : user.tarjetas())
+        os << *tarjeta << std::endl;
     return os;
 }
 
@@ -128,18 +135,3 @@ std::ostream &mostrar_carro(std::ostream &os, const Usuario &user)
     }
     return os;
 }
-
-/*
-ostream &mostrar_carro(ostream &os, const Usuario &user)
-{
-    os << "Carritodecomprade" << user.id() << "[Artículos:" << user.n_articulos() << "]" << endl;
-    os << "Cant.Artículo" << endl;
-    os << "==================================================" << endl;
-    Usuario::Articulos::const_iterator iter = user.compra().begin();
-    while (iter != user.compra().end())
-    {
-        os << "" << iter->second << "" << *iter->first << endl;
-        iter++;
-    }
-    return os;
-}*/

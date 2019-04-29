@@ -3,7 +3,6 @@
 #include <iostream>
 #include "cadena.hpp"
 #include "tarjeta.hpp"
-#include "numero.hpp"
 #include "articulo.hpp"
 #include "cadena.hpp"
 #include <map>
