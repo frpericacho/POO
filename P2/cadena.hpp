@@ -2,6 +2,8 @@
 #define CADENA_HPP_
 #include <iostream>
 #include <iterator>
+#include <functional>
+
 class Cadena
 {
 public:
@@ -31,41 +33,53 @@ public:
   using reverse_iterator = std::reverse_iterator<iterator>;
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-  iterator begin(){ 
-    return s_; 
+  iterator begin()
+  {
+    return s_;
   }
-  iterator end(){ 
-    return s_ + tam_; 
+  iterator end()
+  {
+    return s_ + tam_;
   }
-  const_iterator begin() const{ 
-    return s_; 
+  const_iterator begin() const
+  {
+    return s_;
   }
-  const_iterator end() const{ 
-    return s_ + tam_; 
+  const_iterator end() const
+  {
+    return s_ + tam_;
   }
-  const_iterator cbegin() const{ 
-    return s_; 
+  const_iterator cbegin() const
+  {
+    return s_;
   }
-  const_iterator cend() const{ 
-    return s_ + tam_; 
+  const_iterator cend() const
+  {
+    return s_ + tam_;
   }
-  reverse_iterator rbegin(){ 
-    return reverse_iterator(end()); 
+  reverse_iterator rbegin()
+  {
+    return reverse_iterator(end());
   }
-  reverse_iterator rend(){ 
-    return reverse_iterator(begin()); 
+  reverse_iterator rend()
+  {
+    return reverse_iterator(begin());
   }
-  const_reverse_iterator rend() const{ 
-    return const_reverse_iterator(begin()); 
+  const_reverse_iterator rend() const
+  {
+    return const_reverse_iterator(begin());
   }
-  const_reverse_iterator rbegin() const{ 
-    return const_reverse_iterator(end()); 
+  const_reverse_iterator rbegin() const
+  {
+    return const_reverse_iterator(end());
   }
-  const_reverse_iterator crbegin() const{ 
-    return const_reverse_iterator(end()); 
+  const_reverse_iterator crbegin() const
+  {
+    return const_reverse_iterator(end());
   }
-  const_reverse_iterator crend() const{ 
-    return const_reverse_iterator(begin()); 
+  const_reverse_iterator crend() const
+  {
+    return const_reverse_iterator(begin());
   }
 
   ~Cadena();
@@ -84,5 +98,21 @@ bool operator==(const Cadena &, const Cadena &);
 bool operator!=(const Cadena &, const Cadena &);
 bool operator<=(const Cadena &, const Cadena &);
 bool operator>=(const Cadena &, const Cadena &);
+
+// Para P2 y ss.
+// Especialización de la plantilla hash<T>para definir la
+// función hash a utilizar con contenedores desordenados de
+// Cadena, unordered_[set|map|multiset|multimap].
+namespace std
+{
+template <>
+struct hash<Cadena>
+{
+  size_t operator()(const Cadena &cad) const
+  { // conversión const char* ->string
+    return hash<string>{}(cad.c_str());
+  }
+};
+} // namespace std
 
 #endif

@@ -23,9 +23,7 @@ Numero::operator const char *() const
 Numero::Numero(const Cadena &cad)
 {
     Cadena aux(cad);
-    //quitar espacios
     std::remove_if(aux.begin(), aux.end() + 1, [](char c) { return isspace(c); });
-    //mirar tamaño
     if (aux.length() < 13 || aux.length() > 19 || aux.length() == 0)
         throw Incorrecto(Razon::LONGITUD);
 
@@ -37,7 +35,7 @@ Numero::Numero(const Cadena &cad)
         throw Incorrecto(Razon::NO_VALIDO);
 }
 
-Tarjeta::Tarjeta(Numero num,Usuario &user, Fecha f): num_(num), user_(&user), caducidad_(f), estado_(true)
+Tarjeta::Tarjeta(Numero num, Usuario &user, Fecha f) : num_(num), user_(&user), caducidad_(f), estado_(true)
 {
     if (Fecha() > caducidad_)
         throw Caducada(caducidad_);
@@ -62,11 +60,95 @@ Tarjeta::Tarjeta(Numero num,Usuario &user, Fecha f): num_(num), user_(&user), ca
     case '5':
         t_ = Mastercard;
         break;
-    case '6': t_ = Maestro;
+    case '6':
+        t_ = Maestro;
         break;
-        default:
+    default:
         t_ = Otro;
         break;
     }
+}
 
+inline Tarjeta::Tipo Tarjeta::tipo() const
+{
+    return t_;
+}
+
+inline Numero Tarjeta::numero() const
+{
+    return num_;
+}
+
+inline const Usuario *Tarjeta::titular() const
+{
+    return user_;
+}
+
+inline Fecha Tarjeta::caducidad() const
+{
+    return caducidad_;
+}
+
+// inline bool Tarjeta::activa() const
+// {
+//     return estado_;
+// }
+
+// inline bool Tarjeta::activa(bool est)
+// {
+//     estado_ = est;
+//     return estado_;
+// }
+
+void Tarjeta::anula_titular()
+{
+    user_ = nullptr;
+    estado_ = false;
+}
+
+Tarjeta::~Tarjeta()
+{
+    if (Usuario *usuar = const_cast<Usuario *>(user_))
+        usuar->no_es_titular_de(*this);
+}
+
+std::ostream &operator<<(std::ostream &os, const Tarjeta &T)
+{
+    return os << T.tipo() << std::endl
+              << T.numero() << std::endl
+              << T.titular() << std::endl
+              << "Caduca: " << std::setfill('0') << std::setw(2)
+              << T.caducidad().mes() << '/' << std::setw(2)
+              << (T.caducidad().anno() % 100);
+}
+
+std::ostream &operator<<(std::ostream &os, const Tarjeta::Tipo &t)
+{
+    switch (t)
+    {
+    case Tarjeta::Tipo::VISA:
+        os << "VISA";
+        break;
+    case Tarjeta::Tipo::Mastercard:
+        os << "Mastercard";
+        break;
+    case Tarjeta::Tipo::Maestro:
+        os << "Maestro";
+        break;
+    case Tarjeta::Tipo::JCB:
+        os << "JCB";
+        break;
+    case Tarjeta::Tipo::AmericanExpress:
+        os << "AmericanExpress";
+        break;
+    default:
+        os << "Otro";
+        break;
+    }
+    return os;
+}
+
+bool operator<(const Tarjeta &A, const Tarjeta &B)
+{
+    return A.numero() < B.numero();
 }

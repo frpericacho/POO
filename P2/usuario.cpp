@@ -10,7 +10,7 @@
 Clave::Clave(const char *cad)
 {
     if (strlen(cad) < 5)
-        Incorrecta(Clave::CORTA);
+        throw(Clave::CORTA);
     const char *c = "abcdefg";
     char salt[2];
     salt[0] = c[rand() % 7];
@@ -29,6 +29,8 @@ bool Clave::verifica(const char *cad) const
 {
     return clave_ == crypt(cad, clave_.c_str());
 }
+
+Usuario::Usuarios Usuario::user_;
 
 Usuario::Usuario(const Cadena &id, const Cadena &nomb, const Cadena &apell, const Cadena &dir, const Clave &clv) : identificador_(id), nombre_(nomb), apellidos_(apell), direccion_(dir), clave_(clv)
 {
@@ -78,30 +80,15 @@ Cadena Usuario::direccion() const
     return direccion_;
 }
 
-size_t Usuario::n_articulos() const
-{
-}
-
 Usuario::~Usuario()
 {
-    for (auto i = t_.begin; i != t_.end(); i++)
-    {
-        i->second->anula_titular();
-    }
+    for (auto &[numero, tarjeta] : t_)
+        tarjeta->anula_titular();
     user_.erase(identificador_);
 }
 
 std::ostream &operator<<(std::ostream &os, const Usuario &user)
 {
-    // os << user.identificador_ << "[" << user.clave_.clave().c_str() << "]" << user.nombre_ << user.apellidos_ << "\n"
-    //    << user.direccion_ << std::endl;
-    // os << "Tarjetas:";
-    // for (auto i = user.tarjetas().begin(); i != user.tarjetas().end(); i++)
-    // {
-    //     os << *i->second << std::endl;
-    // }
-
-    // return os;
     os << user.identificador_ << "[" << user.clave_.clave().c_str() << "]"
        << user.nombre_ << user.apellidos_ << std::endl
        << user.direccion_ << std::endl

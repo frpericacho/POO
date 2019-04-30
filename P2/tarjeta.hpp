@@ -5,6 +5,7 @@
 #include "usuario.hpp"
 #include "fecha.hpp"
 
+class Usuario;
 class Numero
 {
 public:
@@ -54,28 +55,40 @@ public:
     public:
         Caducada(const Fecha &f) : f_(f) {}
         Fecha cuando() const { return f_; }
+
     private:
         Fecha f_;
     };
 
-    class Num_duplicado{
-        public:
-            Num_duplicado(const Numero &num):n_(num){}
-            Numero duplicado() const { return n_; }
-        private:
-            Numero n_;
+    class Num_duplicado
+    {
+    public:
+        explicit Num_duplicado(const Numero &num) : n_(num) {}
+        Numero que() const { return n_; }
+
+    private:
+        Numero n_;
+    };
+
+    class Desactivada
+    {
     };
 
     Tipo tipo() const;
     Numero numero() const;
     const Usuario *titular() const;
     Fecha caducidad() const;
-    bool activa() const;
+    bool activa() const { return estado_; }
 
-    bool activa(bool = true);
+    bool activa(bool est = true)
+    {
+        estado_ = est;
+        return estado_;
+    }
     void anula_titular();
 
     ~Tarjeta();
+
 private:
     Tipo t_;
     Numero num_;
@@ -83,5 +96,9 @@ private:
     Fecha caducidad_;
     bool estado_;
 };
+
+std::ostream &operator<<(std::ostream &os, const Tarjeta &T);
+std::ostream &operator<<(std::ostream &os, const Tarjeta::Tipo &t);
+bool operator<(const Tarjeta &A, const Tarjeta &B);
 
 #endif
