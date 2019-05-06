@@ -6,10 +6,11 @@
 
 class Articulo{
     public:
-        Articulo(Cadena ,Cadena ,Fecha ,double ,unsigned );
-        Cadena referencia() const;
-        Cadena titulo() const;
-        Fecha f_publi() const;
+        Articulo(const Cadena ,const Cadena ,const Fecha ,double ,unsigned );
+        
+        const Cadena referencia() const;
+        const Cadena titulo() const;
+        const Fecha f_publi() const;
         unsigned stock() const;
         unsigned& stock();
         double precio() const;

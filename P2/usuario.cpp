@@ -1,23 +1,28 @@
-#include <iostream>
 #include "usuario.hpp"
 #include "cadena.hpp"
 #include <cstring>
+extern "C"
+{
 #include <unistd.h>
+}
 #include <cstdlib>
-#include <crypt.h>
 #include <iomanip>
+#include <random>
+#define CHARS "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210/."
 
 Clave::Clave(const char *cad)
 {
-    if (strlen(cad) < 5)
-        throw(Clave::CORTA);
-    const char *c = "abcdefg";
-    char salt[2];
-    salt[0] = c[rand() % 7];
-    salt[1] = c[rand() % 7];
-    if (crypt(cad, salt) == nullptr)
-        throw Incorrecta(Clave::ERROR_CRYPT);
-    clave_ = crypt(cad, salt);
+    if (std::strlen(cad) < 5)
+        throw Incorrecta(Clave::CORTA);
+
+    static std::random_device rd;
+    static std::uniform_int_distribution<std::size_t> dis(0, 63);
+    static const char *const cv = CHARS; // CHARS en linea 16
+    const char salt[] = {cv[dis(rd)], cv[dis(rd)]};
+    if (const char *const encrypt = crypt(cad, salt))
+        clave_ = encrypt;
+    else
+        throw Incorrecta(Razon::ERROR_CRYPT);
 }
 
 const Cadena &Clave::clave() const
@@ -27,7 +32,9 @@ const Cadena &Clave::clave() const
 
 bool Clave::verifica(const char *cad) const
 {
-    return clave_ == crypt(cad, clave_.c_str());
+    if (const char *const pw = crypt(cad, clave_.c_str()))
+        return pw == clave_;
+    throw Incorrecta(Razon::ERROR_CRYPT);
 }
 
 Usuario::Usuarios Usuario::user_;
@@ -100,25 +107,15 @@ std::ostream &operator<<(std::ostream &os, const Usuario &user)
 
 std::ostream &mostrar_carro(std::ostream &os, const Usuario &user)
 {
-    os << "Carrito de compra de " << user.id() << "[Articulos: " << user.n_articulos() << "]"
-       << "\n"
-       << "Cant.Articulo" << std::endl
-       << std::setw(95) << std::setfill('=') << "\n"
-       << std::setfill(' ');
-
-    int cant = user.n_articulos();
-
-    while (cant > 0)
+    os << "Carrito de compra de " << user.id() << "[Artículos: "
+       << user.n_articulos() << "]\nCant.Artículo\n"
+       << Cadena(95, '=') + "\n";
+    for (const auto &[articulo, cantidad] : user.compra())
     {
-        for (auto i = user.compra().begin(); i != user.compra().end(); i++)
-        {
-            os << std::setw(4) << i->second << "    "
-               << " [" << (*i->first).referencia() << "] "
-               << "\""
-               << (*i->first).titulo() << "\", " << (*i->first).f_publi().anno()
-               << ". " << std::fixed << std::setprecision(2) << (*i->first).precio() << " €" << std::endl;
-            --cant;
-        }
+        os << std::setw(4) << cantidad << "   "
+           << "[" << articulo->referencia() << "] \"" << articulo->titulo()
+           << "\", " << articulo->f_publi().anno() << ". " << std::fixed
+           << std::setprecision(2) << articulo->precio() << " €\n";
     }
     return os;
 }

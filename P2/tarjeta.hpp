@@ -1,6 +1,6 @@
 #ifndef TARJETA_HPP
 #define TARJETA_HPP
-#include <iostream>
+#include <ostream>
 #include "cadena.hpp"
 #include "usuario.hpp"
 #include "fecha.hpp"
@@ -77,6 +77,7 @@ public:
     Tipo tipo() const;
     Numero numero() const;
     const Usuario *titular() const;
+    Cadena titular_facial() const;
     Fecha caducidad() const;
     bool activa() const { return estado_; }
 

@@ -2,18 +2,18 @@
 #include "cadena.hpp"
 #include "fecha.hpp"
 
-Articulo::Articulo(Cadena ref,Cadena til,Fecha publi,double precio,unsigned stck):referencia_(ref), 
+Articulo::Articulo(const Cadena ref,const Cadena til,const Fecha publi,double precio,unsigned stck):referencia_(ref), 
         titulo_(til),f_publi_(publi),precio_(precio),stock_(stck){}
 
-Cadena Articulo::referencia() const{
+const Cadena Articulo::referencia() const{
     return referencia_;
 }
 
-Cadena Articulo::titulo() const{
+const Cadena Articulo::titulo() const{
     return titulo_;
 }
 
-Fecha Articulo::f_publi() const{
+const Fecha Articulo::f_publi() const{
     return f_publi_;
 }
 

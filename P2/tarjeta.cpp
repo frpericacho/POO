@@ -1,14 +1,18 @@
-#include <iostream>
-#include <cstring>
-#include "tarjeta.hpp"
-#include <iomanip>
-#include <iostream>
 #include <algorithm>
-#include <cstring>
 #include <cctype>
+#include <cstring>
+#include <iomanip>
+#include "tarjeta.hpp"
 #include "usuario.hpp"
 
 bool luhn(const Cadena &cad);
+
+static Cadena str_toupper(Cadena s) {
+    std::transform(s.begin(), s.end(), s.begin(), 
+                   [](unsigned char c){ return std::toupper(c); }
+                  );
+    return s;
+}
 
 bool operator<(const Numero &A, const Numero &B)
 {
@@ -27,7 +31,7 @@ Numero::Numero(const Cadena &cad)
     if (aux.length() < 13 || aux.length() > 19 || aux.length() == 0)
         throw Incorrecto(Razon::LONGITUD);
 
-    cad_ = aux;
+    cad_ = aux.c_str();
 
     if (std::count_if(cad_.begin(), cad_.end(), static_cast<int (*)(int)>(std::isdigit)) != cad_.length())
         throw Incorrecto(Razon::DIGITOS);
@@ -79,7 +83,7 @@ inline Numero Tarjeta::numero() const
     return num_;
 }
 
-inline const Usuario *Tarjeta::titular() const
+const Usuario *Tarjeta::titular() const
 {
     return user_;
 }
@@ -88,17 +92,6 @@ inline Fecha Tarjeta::caducidad() const
 {
     return caducidad_;
 }
-
-// inline bool Tarjeta::activa() const
-// {
-//     return estado_;
-// }
-
-// inline bool Tarjeta::activa(bool est)
-// {
-//     estado_ = est;
-//     return estado_;
-// }
 
 void Tarjeta::anula_titular()
 {
@@ -112,11 +105,15 @@ Tarjeta::~Tarjeta()
         usuar->no_es_titular_de(*this);
 }
 
+Cadena Tarjeta::titular_facial() const{
+    return str_toupper(user_->nombre()) + " " + str_toupper(user_->apellidos());
+}
+
 std::ostream &operator<<(std::ostream &os, const Tarjeta &T)
 {
     return os << T.tipo() << std::endl
               << T.numero() << std::endl
-              << T.titular() << std::endl
+              << T.titular_facial() << std::endl
               << "Caduca: " << std::setfill('0') << std::setw(2)
               << T.caducidad().mes() << '/' << std::setw(2)
               << (T.caducidad().anno() % 100);

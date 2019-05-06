@@ -1,6 +1,6 @@
 #ifndef USUARIO_HPP
 #define USUARIO_HPP
-#include <iostream>
+#include <ostream>
 #include "cadena.hpp"
 #include "tarjeta.hpp"
 #include "articulo.hpp"
