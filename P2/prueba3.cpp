@@ -1,8 +1,8 @@
 #include <iostream>
 
 int main(){
-
-    printf("hola");
+    int a;
+    std::cout << "hola";
 
     return 0;
 }
