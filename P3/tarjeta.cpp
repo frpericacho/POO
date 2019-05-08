@@ -40,7 +40,7 @@ Numero::Numero(const Cadena &cad)
         throw Incorrecto(Razon::LONGITUD);
 
     cad_ = aux.c_str();
-
+ 
     /*if (std::count_if(cad_.begin(), cad_.end(), static_cast<int (*)(int)>(std::isdigit)) != cad_.length())
         throw Incorrecto(Razon::DIGITOS);*/
     if (std::find_if(cad_.begin(), cad_.end(), std::not1(EsDigito())) != cad_.end())
