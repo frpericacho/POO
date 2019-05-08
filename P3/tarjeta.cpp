@@ -7,10 +7,10 @@
 
 bool luhn(const Cadena &cad);
 
-static Cadena str_toupper(Cadena s) {
-    std::transform(s.begin(), s.end(), s.begin(), 
-                   [](unsigned char c){ return std::toupper(c); }
-                  );
+static Cadena str_toupper(Cadena s)
+{
+    std::transform(s.begin(), s.end(), s.begin(),
+                   [](unsigned char c) { return std::toupper(c); });
     return s;
 }
 
@@ -27,13 +27,23 @@ Numero::operator const char *() const
 Numero::Numero(const Cadena &cad)
 {
     Cadena aux(cad);
-    std::remove_if(aux.begin(), aux.end() + 1, [](char c) { return isspace(c); });
+    Cadena::iterator end = remove_if(aux.begin(), aux.end(), EsBlanco());
+    if(end != aux.end()){
+        *end = '\0';
+        Cadena tmp(aux.c_str());
+        cad_ = tmp;
+    }
+
+    //std::remove_if(aux.begin(), aux.end() + 1, [](char c) { return isspace(c); });
+    
     if (aux.length() < 13 || aux.length() > 19 || aux.length() == 0)
         throw Incorrecto(Razon::LONGITUD);
 
     cad_ = aux.c_str();
 
-    if (std::count_if(cad_.begin(), cad_.end(), static_cast<int (*)(int)>(std::isdigit)) != cad_.length())
+    /*if (std::count_if(cad_.begin(), cad_.end(), static_cast<int (*)(int)>(std::isdigit)) != cad_.length())
+        throw Incorrecto(Razon::DIGITOS);*/
+    if (std::find_if(cad_.begin(), cad_.end(), std::not1(EsDigito())) != cad_.end())
         throw Incorrecto(Razon::DIGITOS);
     if (!luhn(cad_))
         throw Incorrecto(Razon::NO_VALIDO);
@@ -105,7 +115,8 @@ Tarjeta::~Tarjeta()
         usuar->no_es_titular_de(*this);
 }
 
-Cadena Tarjeta::titular_facial() const{
+Cadena Tarjeta::titular_facial() const
+{
     return str_toupper(user_->nombre()) + " " + str_toupper(user_->apellidos());
 }
 
