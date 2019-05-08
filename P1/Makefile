@@ -37,6 +37,6 @@ $(OBJ): $(SRC)
 cadena_check: cadena_check.cpp
 	${MAKE} -f Make_check.mk
 
-limpia: 
+clean: 
 	$(RMV) *.o
 	$(MAKE) -f Make_check.mk clean
