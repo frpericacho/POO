@@ -6,6 +6,17 @@
 #include "fecha.hpp"
 
 class Usuario;
+
+struct EsDigito : public std::unary_function<char, bool>
+{
+    bool operator()(char c) const { return isdigit(c); }
+};
+
+struct EsBlanco : public std::unary_function<char, bool>
+{
+    bool operator()(char c) const { return isspace(c); }
+};
+
 class Numero
 {
 public:
