@@ -83,6 +83,10 @@ public:
 
     class Desactivada
     {
+        public: 
+
+        private:
+            
     };
 
     Tipo tipo() const;

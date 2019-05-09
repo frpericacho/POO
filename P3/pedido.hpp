@@ -3,18 +3,36 @@
 #include <iostream>
 #include "tarjeta.hpp"
 #include "fecha.hpp"
+#include "articulo.hpp"
 #include <ostream>
 
-class pedido
+class Pedido
 {
 public:
-    pedido();
+    Pedido(Usuario, Tarjeta &,Fecha );
 
     class Vacia{
         public:
-
+            Vacia(Usuario &);
+            const usuario() const;
         private:
+            Usuario *user;
+    };
 
+    class Imposrtor{
+        public:
+            Impostor(Usuario &);
+            const usuario() const;
+        private:
+            Usuario *user;
+    };
+
+    class SinStock{
+        public:
+            SinStock(Articulo &);
+            const articulo() const;
+        private:
+            Articulo *art;
     };
 
     int numero() const{ return num_; };
@@ -30,5 +48,7 @@ private:
     Fecha fecha_ ;
     double total_ ;
 };
+
+std::ostream &operator<<(std::ostream &os, Pedido &P);
 
 #endif
