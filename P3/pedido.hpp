@@ -6,6 +6,8 @@
 #include "articulo.hpp"
 #include <ostream>
 
+
+
 class Pedido
 {
 public:
@@ -13,36 +15,36 @@ public:
 
     class Vacia{
         public:
-            Vacia(Usuario &);
-            const usuario() const;
+            Vacia(Usuario &u):user(&u){};
+            Usuario &usuario() const{return *user;}
         private:
             Usuario *user;
     };
 
-    class Imposrtor{
+    class Impostor{
         public:
-            Impostor(Usuario &);
-            const usuario() const;
+            Impostor(Usuario &u):user(&u){};
+            Usuario &usuario() const {return *user;}
         private:
             Usuario *user;
     };
 
     class SinStock{
         public:
-            SinStock(Articulo &);
-            const articulo() const;
+            SinStock(Articulo *art): art_(art){};
+            Articulo &articulo() const {return *art_;}
         private:
-            Articulo *art;
+            Articulo *art_;
     };
 
     int numero() const{ return num_; };
     const Tarjeta* tarjeta(){ return tarjeta_; };
     Fecha fecha() const{ return fecha_; };
     double total() const{ return total_; };
-    int n_total_pedidos() const{ return N_pedidos; };
+    int n_total_pedidos() const{ return cant_; };
 
 private:
-    int N_pedidos ;
+    int cant_ ;
     int num_ ;
     Tarjeta *tarjeta_ ;
     Fecha fecha_ ;
