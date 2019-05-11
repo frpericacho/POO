@@ -6,7 +6,8 @@
 #include "articulo.hpp"
 #include <ostream>
 
-
+class Pedido_Articulo;
+class Usuario_Pedido;
 
 class Pedido
 {
