@@ -1,9 +1,7 @@
 #ifndef PEDIDO_HPP
 #define PEDIDO_HPP
-#include <iostream>
 #include "tarjeta.hpp"
 #include "fecha.hpp"
-#include "articulo.hpp"
 #include <ostream>
 
 class Pedido_Articulo;
@@ -12,12 +10,12 @@ class Usuario_Pedido;
 class Pedido
 {
 public:
-    Pedido(Usuario_Pedido &, Pedido_Articulo &, Usuario, Tarjeta &, Fecha);
+    Pedido(Usuario_Pedido &, Pedido_Articulo &, Usuario &,const Tarjeta &,const Fecha f = Fecha());
 
-    class Vacia
+    class Vacio
     {
     public:
-        Vacia(Usuario &u) : user(&u){};
+        Vacio(Usuario &u) : user(&u){};
         Usuario &usuario() const { return *user; }
 
     private:
@@ -44,20 +42,20 @@ public:
         Articulo *art_;
     };
 
-    int numero() const { return num_; };
-    const Tarjeta *tarjeta() { return tarjeta_; };
-    Fecha fecha() const { return fecha_; };
-    double total() const { return total_; };
-    int n_total_pedidos() const { return cant_; };
+    int numero() const noexcept{ return num_; };
+    Tarjeta const* tarjeta() const noexcept{ return tarjeta_; };
+    Fecha fecha() const noexcept{ return fecha_; };
+    double total() const noexcept{ return total_; };
+    static int n_total_pedidos() noexcept;
 
 private:
-    int cant_;
+    inline static int cant_ = 0;
     int num_;
-    Tarjeta *tarjeta_;
+    const Tarjeta *tarjeta_;
     Fecha fecha_;
     double total_;
 };
 
-std::ostream &operator<<(std::ostream &os, Pedido &P);
+std::ostream &operator<<(std::ostream &os,const Pedido &P);
 
 #endif

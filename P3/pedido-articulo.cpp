@@ -1,21 +1,21 @@
-#include <pedido_articulo.hpp>
+#include <pedido-articulo.hpp>
 #include <iomanip>
 
 std::ostream &operator<<(std::ostream &os,const LineaPedido &lp)
 {
-    os << std::fixed << std::setprecision(2) << lp.precio_venta() << " €    " << lp.cantidad();
+    os << std::fixed << std::setprecision(2) << lp.precio_venta() << " €\t" << lp.cantidad();
     return os;
 }
 
-void Pedido_Articulo::pedir(Pedido &ped, Articulo &art, double pr, int cant = 1)
+void Pedido_Articulo::pedir(Pedido &ped, Articulo &art, double pr, unsigned cant)
 {
     PA[&ped].insert(std::make_pair(&art, LineaPedido(pr, cant)));
     AP[&art].insert(std::make_pair(&ped, LineaPedido(pr, cant)));
 }
 
-void Pedido_Articulo::pedir(Articulo &art, Pedido &ped, double pr, int cant = 1)
+void Pedido_Articulo::pedir(Articulo &art, Pedido &ped, double pr, unsigned cant )
 {
-    pedir(ped, art, pr, cant);
+    Pedido_Articulo::pedir(ped, art, pr, cant);
 }
 
 Pedido_Articulo::ItemsPedido &Pedido_Articulo::detalle(Pedido &ped)
@@ -30,7 +30,7 @@ Pedido_Articulo::Pedidos Pedido_Articulo::ventas(Articulo &art)
 
 std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::Pedidos &ped)
 {
-    int tmp_cantidad = 0;
+    unsigned tmp_cantidad = 0;
     double tmp_total = 0.0;
     os << "[Pedidos: " << ped.size() << "]\n"
        << Cadena(66, '=') << std::endl
@@ -55,6 +55,7 @@ std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::ItemsPedido &i
 {
     double tmp_total = 0.0;
     os << '\n'
+       << Cadena(66, '=') << std::endl
        << "  PVP\tCantidad\tArtículo\n"
        << Cadena(66, '=') << std::endl;
 

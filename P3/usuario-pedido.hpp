@@ -1,13 +1,12 @@
 #ifndef USUARIO_PEDIDO_HPP
 #define USUARIO_PEDIDO_HPP
 #include <set>
-#include "usuario.hpp"
 #include "pedido.hpp"
 
 class Usuario_Pedido
 {
 public:
-    typedef set<Pedido*> Pedidos;
+    typedef std::set<Pedido*> Pedidos;
 
     void asocia(Usuario &user, Pedido &ped)
     {
@@ -20,7 +19,7 @@ public:
         asocia(user,ped);
     }
 
-    Pedidos &pedidos(Usuario &us) { return UP[&us]; }
+    Pedidos pedidos(Usuario &us) { return UP[&us]; }
     Usuario *cliente(Pedido &pedido) { return PU[&pedido]; }
 
 private:

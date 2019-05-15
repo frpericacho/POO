@@ -1,13 +1,14 @@
 #ifndef USUARIO_HPP
 #define USUARIO_HPP
-#include <ostream>
-#include "cadena.hpp"
 #include "tarjeta.hpp"
 #include "articulo.hpp"
 #include "cadena.hpp"
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
+
+class Tarjeta;
+class Numero;
 
 class Clave
 {
@@ -38,9 +39,6 @@ public:
 private:
     Cadena clave_;
 };
-
-class Tarjeta;
-class Numero;
 
 class Usuario
 {

@@ -1,11 +1,9 @@
 #include "usuario.hpp"
-#include "cadena.hpp"
 #include <cstring>
 extern "C"
 {
 #include <unistd.h>
 }
-#include <cstdlib>
 #include <iomanip>
 #include <random>
 #define CHARS "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210/."
@@ -107,8 +105,8 @@ std::ostream &operator<<(std::ostream &os, const Usuario &user)
 
 std::ostream &mostrar_carro(std::ostream &os, const Usuario &user)
 {
-    os << "Carrito de compra de " << user.id() << "[Artículos: "
-       << user.n_articulos() << "]\nCant.Artículo\n"
+    os << "Carrito de compra de " << user.id() << " [Artículos: "
+       << user.n_articulos() << "]\n Cant. Artículo\n"
        << Cadena(95, '=') + "\n";
     for (const auto &[articulo, cantidad] : user.compra())
     {
