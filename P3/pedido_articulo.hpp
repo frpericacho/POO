@@ -50,7 +50,7 @@ private:
     std::map<Articulo *, Pedidos, OrdenaArticulos> AP;
 };
 
-std::ostream &operator<<(std::ostream &os, LineaPedido &lp);
+std::ostream &operator<<(std::ostream &os, const LineaPedido &lp);
 std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::Pedidos &ped);
 std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::ItemsPedido &item);
 #endif
