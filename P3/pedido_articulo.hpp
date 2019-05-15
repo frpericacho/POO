@@ -25,6 +25,8 @@ public:
     void pedir(Articulo &art, Pedido &ped, double pr, int cant = 1);
     ItemsPedido& detalle(Pedido &ped);
     Pedidos ventas(Articulo &art);
+    std::ostream &mostrarDetallePedidos(std::ostream &);
+    std::ostream &mostrarVentasArticulos(std::ostream &);
     //ME FALTA DESDE EL PRIMER OSTREAM Y HACER LOS OrdenaArticulos Y OrdenaPedidos
 
 private:
@@ -33,5 +35,6 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &os, LineaPedido &lp);
-
+std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::Pedidos &ped);
+std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::ItemsPedido &item);
 #endif
