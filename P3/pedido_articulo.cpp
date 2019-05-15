@@ -52,6 +52,13 @@ std::ostream &Pedido_Articulo::mostrarDetallePedidos(std::ostream &os)
               << total << " €" << std::endl;
 }
 
-std::ostream &Pedido_Articulo::mostrarVentasArticulos(std::ostream &)
+std::ostream &Pedido_Articulo::mostrarVentasArticulos(std::ostream &os)
 {
+    for (const auto &i : AP)
+    {
+        os << "Ventas de [" << i.first->referencia() << "] \""
+           << i.first->titulo() << "\"\n"
+           << i.second << std::endl;
+    }
+    return os;
 }
