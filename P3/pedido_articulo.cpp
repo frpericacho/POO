@@ -30,10 +30,46 @@ Pedido_Articulo::Pedidos Pedido_Articulo::ventas(Articulo &art)
 
 std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::Pedidos &ped)
 {
+    int tmp_cantidad = 0;
+    double tmp_total = 0.0;
+    os << "[Pedidos: " << ped.size() << "]\n"
+       << Cadena(80, '=') << std::endl
+       << "  PVP\tCantidad\tFecha de venta\n"
+       << Cadena(80, '=') << std::endl;
+
+    for (const auto &i : ped)
+    {
+        os << i.second << "\t\t" << i.first->fecha() << std::endl;
+        tmp_total += i.second.precio_venta() * i.second.cantidad();
+        tmp_cantidad += i.second.cantidad();
+    }
+
+    os << Cadena(80, '=') << std::endl
+       << std::fixed << std::setprecision(2) << tmp_total << " €\t"
+       << tmp_cantidad << std::endl;
+
+    return os;
 }
 
 std::ostream &operator<<(std::ostream &os, const Pedido_Articulo::ItemsPedido &item)
 {
+    double tmp_total = 0.0;
+    os << '\n'
+       << "  PVP\tCantidad\tArtículo\n"
+       << Cadena(80, '=') << std::endl;
+
+    for (const auto &i : item)
+    {
+        os << i.second << "\t\t[" << i.first->referencia() << "] \""
+           << i.first->titulo() << "\"" << std::endl;
+        tmp_total += i.second.precio_venta() * i.second.cantidad();
+    }
+
+    os << Cadena(80, '=') << std::endl
+       << "Total\t" << std::fixed << std::setprecision(2) << tmp_total << " €\n"
+       << std::endl;
+
+    return os;
 }
 
 std::ostream &Pedido_Articulo::mostrarDetallePedidos(std::ostream &os)

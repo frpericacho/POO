@@ -16,6 +16,22 @@ private:
     int cant_;
 };
 
+struct OrdenaPedidos
+{
+    bool operator()(const Pedido *ped1, const Pedido *ped2) const
+    {
+        return (ped1->numero() < ped2->numero());
+    }
+};
+
+struct OrdenaArticulos
+{
+    bool operator()(const Articulo *art1, const Articulo *art2) const
+    {
+        return (art1->referencia() < art2->referencia());
+    }
+};
+
 class Pedido_Articulo
 {
 public:
@@ -23,11 +39,11 @@ public:
     typedef std::map<Pedido *, LineaPedido, OrdenaPedidos> Pedidos;
     void pedir(Pedido &ped, Articulo &art, double pr, int cant = 1);
     void pedir(Articulo &art, Pedido &ped, double pr, int cant = 1);
-    ItemsPedido& detalle(Pedido &ped);
+    ItemsPedido &detalle(Pedido &ped);
     Pedidos ventas(Articulo &art);
     std::ostream &mostrarDetallePedidos(std::ostream &);
     std::ostream &mostrarVentasArticulos(std::ostream &);
-    //ME FALTA DESDE EL PRIMER OSTREAM Y HACER LOS OrdenaArticulos Y OrdenaPedidos
+    //ME FALTA EL PRIMER OSTREAM Y HACER LOS OrdenaArticulos Y OrdenaPedidos
 
 private:
     std::map<Pedido *, ItemsPedido, OrdenaPedidos> PA;
