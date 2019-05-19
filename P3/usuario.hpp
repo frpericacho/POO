@@ -65,10 +65,12 @@ public:
     
     void es_titular_de(Tarjeta &);
     void no_es_titular_de(Tarjeta &);
-    Cadena id() const;
-    Cadena nombre() const;
-    Cadena apellidos() const;
-    Cadena direccion() const;
+
+    Cadena id() const {return identificador_;}
+    Cadena nombre() const {return nombre_;}
+    Cadena apellidos() const {return apellidos_;}
+    Cadena direccion() const {return direccion_;}
+    
     void compra(Articulo &, unsigned cant = 1);
     const Tarjetas &tarjetas() const { 
         return t_; 

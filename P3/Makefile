@@ -45,7 +45,9 @@ STD = c++17
 
 # Opciones para el compilador. Añada o quite las que prefiera pero deje
 # la primera. Recomendado: no quite ninguna.
-CXXFLAGS = -std=${STD} -g -pedantic -Wall
+CXXFLAGS = -std=${STD} -g -pedantic -Wall -Wextra -Wfloat-equal -Wundef \
+	-Wcast-align -Wwrite-strings -Wmissing-declarations -Wredundant-decls \
+	-Woverloaded-virtual
 # Opciones del preprocesador. No quite estas.
 CPPFLAGS = ${INCLUDES} -D${NOMBREPRACTICA}
 

@@ -10,7 +10,7 @@ class Usuario_Pedido;
 class Pedido
 {
 public:
-    Pedido(Usuario_Pedido &, Pedido_Articulo &, Usuario &,const Tarjeta &,const Fecha f = Fecha());
+    Pedido(Usuario_Pedido &, Pedido_Articulo &, Usuario &,const Tarjeta &,const Fecha &f = Fecha());
 
     class Vacio
     {
@@ -42,10 +42,10 @@ public:
         Articulo *art_;
     };
 
-    int numero() const noexcept{ return num_; };
-    Tarjeta const* tarjeta() const noexcept{ return tarjeta_; };
-    Fecha fecha() const noexcept{ return fecha_; };
-    double total() const noexcept{ return total_; };
+    int numero() const noexcept { return num_; };
+    Tarjeta const *tarjeta() const noexcept { return tarjeta_; };
+    Fecha fecha() const noexcept { return fecha_; };
+    double total() const noexcept { return total_; };
     static int n_total_pedidos() noexcept;
 
 private:
@@ -56,6 +56,6 @@ private:
     double total_;
 };
 
-std::ostream &operator<<(std::ostream &os,const Pedido &P);
+std::ostream &operator<<(std::ostream &os, const Pedido &P);
 
 #endif

@@ -6,7 +6,7 @@
 
 class Articulo{
     public:
-        Articulo(const Cadena ,const Cadena ,const Fecha ,double ,unsigned );
+        Articulo(const Cadena &,const Cadena &,const Fecha &,double ,unsigned );
         
         const Cadena referencia() const;
         const Cadena titulo() const;

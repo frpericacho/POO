@@ -3,7 +3,7 @@
 #include "fecha.hpp"
 #include <iomanip>
 
-Articulo::Articulo(const Cadena ref,const Cadena til,const Fecha publi,double precio,unsigned stck):referencia_(ref), 
+Articulo::Articulo(const Cadena &ref,const Cadena &til,const Fecha &publi,double precio,unsigned stck):referencia_(ref), 
         titulo_(til),f_publi_(publi),precio_(precio),stock_(stck){}
 
 const Cadena Articulo::referencia() const{

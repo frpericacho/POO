@@ -64,26 +64,26 @@ void Usuario::compra(Articulo &art, unsigned cant)
     else
         art_[&art] = cant;
 }
-
-Cadena Usuario::id() const
+/*
+inline Cadena Usuario::id() const
 {
     return identificador_;
 }
 
-Cadena Usuario::nombre() const
+inline Cadena Usuario::nombre() const
 {
     return nombre_;
 }
 
-Cadena Usuario::apellidos() const
+inline Cadena Usuario::apellidos() const
 {
     return apellidos_;
 }
 
-Cadena Usuario::direccion() const
+inline Cadena Usuario::direccion() const
 {
     return direccion_;
-}
+}*/
 
 Usuario::~Usuario()
 {
