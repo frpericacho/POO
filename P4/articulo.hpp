@@ -22,8 +22,9 @@ public:
     class Autores_vacios
     {
     public:
-        Autores_vacios(Autores &autr): aut_(&autr){} 
+        Autores_vacios(Autores &autr) : aut_(&autr) {}
         Autores &autores() const;
+
     private:
         Autores *aut_;
     };
@@ -41,10 +42,10 @@ class ArticuloAlmacenable : public Articulo
 {
 public:
     ArticuloAlmacenable(Autores, const Cadena &, const Cadena &, const Fecha &, double, unsigned stock = 0);
-    unsigned stock() const;
-    unsigned &stock();
+    unsigned stock() const { return stock_; }
+    unsigned &stock() { return stock_; }
 
-private:
+protected:
     unsigned stock_;
 };
 
@@ -52,27 +53,27 @@ class Libro : public ArticuloAlmacenable
 {
 public:
     Libro(Autores, const Cadena &, const Cadena &, const Fecha &, double, int, unsigned stock = 0);
-    int n_pag() const;
+    int n_pag() const { return paginas_; }
 
 private:
-    int paginas_;
+    const int paginas_;
 };
 
 class Cederron : public ArticuloAlmacenable
 {
 public:
     Cederron(Autores, const Cadena &, const Cadena &, const Fecha &, double, double, unsigned stock = 0);
-    double tam() const;
+    double tam() const { return tam_; }
 
 private:
-    double tam;
+    const double tam_;
 };
 
 class LibroDigital : public Articulo
 {
 public:
-    LibroDigital(Autores, const Cadena &, const Cadena &, const Fecha &, double, Fecha);
-    Fecha f_expir() const;
+    LibroDigital(Autores, const Cadena &, const Cadena &, const Fecha &, double, const Fecha &);
+    const Fecha &f_expir() const { return f_; }
 
 private:
     Fecha f_;
