@@ -3,8 +3,8 @@
 #include "fecha.hpp"
 #include <iomanip>
 
-Articulo::Articulo(const Cadena &ref,const Cadena &til,const Fecha &publi,double precio,unsigned stck):referencia_(ref), 
-        titulo_(til),f_publi_(publi),precio_(precio),stock_(stck){}
+Articulo::Articulo(Autores autr,const Cadena &ref,const Cadena &til,const Fecha &publi,double precio):
+    autor_(autr) ,referencia_(ref), titulo_(til),f_publi_(publi),precio_(precio){}
 
 const Cadena Articulo::referencia() const{
     return referencia_;
@@ -18,11 +18,11 @@ const Fecha Articulo::f_publi() const{
     return f_publi_;
 }
 
-unsigned Articulo::stock() const{
+unsigned ArticuloAlmacenable::stock() const{
     return stock_;
 }
 
-unsigned& Articulo::stock(){
+unsigned& ArticuloAlmacenable::stock(){
     return stock_;
 }
 
