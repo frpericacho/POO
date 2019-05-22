@@ -1,12 +1,14 @@
 #ifndef ARTICULO_HPP
 #define ARTICULO_HPP
 #include <iostream>
+#include <set>
 #include "cadena.hpp"
 #include "fecha.hpp"
 
 class Articulo
 {
 public:
+    typedef std::set<Autor *> Autores;
     Articulo(Autores, const Cadena &, const Cadena &, const Fecha &, double);
 
     const Cadena referencia() const;
@@ -79,13 +81,13 @@ private:
     Fecha f_;
 };
 
-class Autores
+class Autor
 {
 public:
-    Autores(const Cadena &, const Cadena &, const Cadena &);
-    Cadena nombre() const;
-    Cadena apellido() const;
-    Cadena direccion() const;
+    Autor(const Cadena &, const Cadena &, const Cadena &);
+    const Cadena nombre() const { return nombre_; }
+    const Cadena apellido() const { return apellido_; }
+    const Cadena direccion() const { return direccion_; }
 
 private:
     Cadena nombre_, apellido_, direccion_;
