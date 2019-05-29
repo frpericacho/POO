@@ -60,15 +60,15 @@ class Libro : public ArticuloAlmacenable {
  public:
   Libro(Autores autr, const Cadena &ref, const Cadena &tit, const Fecha &f,
         double pr, unsigned pag, unsigned stock = 0)
-      : ArticuloAlmacenable(autr, ref, tit, f, pr, stock), paginas_(pag) {}
-  unsigned n_pag() const { return paginas_; }
+      : ArticuloAlmacenable(autr, ref, tit, f, pr, stock), n_pag_(pag) {}
+  unsigned n_pag() const { return n_pag_; }
 
   virtual void impresion_especifica(std::ostream &os) const noexcept{
-    os << paginas_ << " págs., " << stock_ << " unidades.";
+    os << n_pag_ << " págs., " << stock_ << " unidades.";
   }
 
  private:
-  const unsigned paginas_;
+  const unsigned n_pag_;
 };
 
 class Cederron : public ArticuloAlmacenable {

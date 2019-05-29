@@ -2,7 +2,7 @@
  * Prueba del SGL, caso de uso 4
  *
  * LIBRERÍA
- * ©2009-17 los profesores de POO
+ * ©2009-19 los profesores de POO
  */
 
 #include <cstdlib>
@@ -39,20 +39,20 @@ int main()
   // Constructor de Tarjeta: Tipo, Numero, Usuario, fecha de caducidad
   // Para evitar problemas con las fechas y sus caducidades, ponemos año 0
   // (el actual) y sumamos uno o más años.
-  using Tipo = Tarjeta::Tipo;
+
   Tarjeta
-    visa1(Tipo::VISA, Numero("4539 4512 0398 7356"),
+    visa1(Numero("4539 4512 0398 7356"),
           lucas, Fecha(31,12,0) + 3*365),
-    american_express(Tipo::AmericanExpress, Numero("378282246310005"),
+    american_express(Numero("378282246310005"),
                      yoshua, Fecha(30,11,0) + 4*365),
-    dinners_club(Tipo::Mastercard, Numero("30569309025904"),
+    dinners_club(Numero("30569309025904"),
                  yessi, Fecha(31,7) + 5*365),
-    mastercard(Tipo::Mastercard, Numero("555555555555 4444  "),
+    mastercard(Numero("555555555555 4444  "),
                krispin, Fecha(31,1) + 3*365),
-    australian_bank_card(Tipo::Maestro, Numero("5610591081018250"),
+    australian_bank_card(Numero("5610591081018250"),
                krispin, Fecha(28,2)+ 365),
-    jcb(Tipo::VISA, Numero("3530111333300000"), yessi, Fecha("31/7/0") + 2*365),
-    visa2(Tipo::VISA, Numero(" 4222222222222"), lucas, Fecha("28/2/0") + 365);
+    jcb(Numero("3530111333300000"), yessi, Fecha("31/7/0") + 2*365),
+    visa2(Numero(" 4222222222222"), lucas, Fecha("28/2/0") + 365);
    
   // Constructor de Autor: nombre, apellidos, dirección
   Autor 
@@ -237,7 +237,7 @@ int main()
   try {
     // Creamos una tarjeta que caducó ayer. ¿Qué pasa? ¡No somos un
     // maldito banco, esto es una prueba!
-    Tarjeta caduca(Tipo::JCB, Numero("4222222222222"), lucas, Fecha() - 1); 
+    Tarjeta caduca(Numero("4222222222222"), lucas, Fecha() - 1); 
     lucas.compra(arte_insulto, 2);
     Pedido no_pagado(usuario_ped, pedido_art, lucas, caduca); // pedido hoy
   }

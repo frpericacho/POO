@@ -1,0 +1,982 @@
+==25797== Memcheck, a memory error detector
+==25797== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==25797== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==25797== Command: ./test-caso4-consola
+==25797== Parent PID: 24359
+==25797== 
+--25797-- 
+--25797-- Valgrind options:
+--25797--    -v
+--25797--    --log-file=errorP4.txt
+--25797--    --leak-check=full
+--25797--    --show-leak-kinds=all
+--25797-- Contents of /proc/version:
+--25797--   Linux version 4.15.0-50-generic (buildd@lcy01-amd64-013) (gcc version 7.3.0 (Ubuntu 7.3.0-16ubuntu3)) #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019
+--25797-- 
+--25797-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-bmi
+--25797-- Page sizes: currently 4096, max supported 4096
+--25797-- Valgrind library directory: /usr/lib/valgrind
+--25797-- Reading syms from /home/felix/Escritorio/ProyectosVisualStudio/POO/Rodriguez_Pericacho_Felix/P4/test-caso4-consola
+--25797-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--25797--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--25797--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--25797--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--25797--   .. CRC is valid
+--25797-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--25797--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--25797--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
+--25797--    object doesn't have a symbol table
+--25797--    object doesn't have a dynamic symbol table
+--25797-- Scheduler: using generic scheduler lock implementation.
+--25797-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==25797== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-25797-by-felix-on-???
+==25797== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-25797-by-felix-on-???
+==25797== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-25797-by-felix-on-???
+==25797== 
+==25797== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==25797== don't want to do, unless you know exactly what you're doing,
+==25797== or are doing some strange experiment):
+==25797==   /usr/lib/valgrind/../../bin/vgdb --pid=25797 ...command...
+==25797== 
+==25797== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==25797==   /path/to/gdb ./test-caso4-consola
+==25797== and then give GDB the following command
+==25797==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=25797
+==25797== --pid is optional if only one valgrind process is running
+==25797== 
+--25797-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--25797-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--25797-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--25797--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--25797--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
+--25797--    object doesn't have a symbol table
+--25797-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--25797--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--25797--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
+--25797--    object doesn't have a symbol table
+==25797== WARNING: new redirection conflicts with existing -- ignoring it
+--25797--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
+--25797--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--25797-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--25797-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--25797-- Reading syms from /lib/x86_64-linux-gnu/libcrypt-2.27.so
+--25797--   Considering /lib/x86_64-linux-gnu/libcrypt-2.27.so ..
+--25797--   .. CRC mismatch (computed 8955bf71 wanted 17b36cbd)
+--25797--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libcrypt-2.27.so ..
+--25797--   .. CRC is valid
+--25797-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+--25797--    object doesn't have a symbol table
+--25797-- Reading syms from /lib/x86_64-linux-gnu/libm-2.27.so
+--25797--   Considering /lib/x86_64-linux-gnu/libm-2.27.so ..
+--25797--   .. CRC mismatch (computed 7feae033 wanted b29b2508)
+--25797--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.27.so ..
+--25797--   .. CRC is valid
+--25797-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--25797--    object doesn't have a symbol table
+--25797-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--25797--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--25797--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--25797--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--25797--   .. CRC is valid
+--25797-- REDIR: 0x5a51c70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51f50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a537c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51de0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51c10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51d40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a6f0f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51fa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a520e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a507c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a50c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a5b6c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51ff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51be0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a6feb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51f20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a51ef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a537f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a52040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--25797-- REDIR: 0x5a64330 (libc.so.6:__strrchr_sse2) redirected to 0x4c32790 (__strrchr_sse2)
+--25797-- REDIR: 0x5a4a070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--25797-- REDIR: 0x5a64620 (libc.so.6:__strlen_sse2) redirected to 0x4c32d30 (__strlen_sse2)
+--25797-- REDIR: 0x5b42fc0 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c35d50 (__memcmp_sse4_1)
+--25797-- REDIR: 0x5a5ce70 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c33da0 (strcmp)
+--25797-- REDIR: 0x5b38510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
+--25797-- REDIR: 0x5a6e460 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c34060 (memcpy@GLIBC_2.2.5)
+--25797-- REDIR: 0x5107240 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4c30110 (operator new(unsigned long))
+--25797-- REDIR: 0x5a63f00 (libc.so.6:__strchr_sse2) redirected to 0x4c328d0 (__strchr_sse2)
+--25797-- REDIR: 0x5a5e970 (libc.so.6:__memchr_sse2) redirected to 0x4c33f80 (memchr)
+--25797-- REDIR: 0x5a64120 (libc.so.6:__strchrnul_sse2) redirected to 0x4c37020 (strchrnul)
+--25797-- REDIR: 0x5a6e440 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c37130 (mempcpy)
+--25797-- REDIR: 0x5a4a950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--25797-- REDIR: 0x5a6ab50 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4c36200 (__stpcpy_sse2_unaligned)
+--25797-- REDIR: 0x51072f0 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c30830 (operator new[](unsigned long))
+--25797-- REDIR: 0x5a4d030 (libc.so.6:calloc) redirected to 0x4c31a70 (calloc)
+--25797-- REDIR: 0x5a83c00 (libc.so.6:__wcslen_sse2) redirected to 0x4c37ad0 (wcslen)
+--25797-- REDIR: 0x5a647c0 (libc.so.6:__strnlen_sse2) redirected to 0x4c32c90 (strnlen)
+--25797-- REDIR: 0x5a69540 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c32dd0 (strcpy)
+--25797-- REDIR: 0x5a6e870 (libc.so.6:__memset_sse2_unaligned) redirected to 0x4c365d0 (memset)
+--25797-- REDIR: 0x5a51590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--25797-- REDIR: 0x5a69b70 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x4c332e0 (__strncpy_sse2_unaligned)
+--25797-- REDIR: 0x51053b0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c316d0 (operator delete[](void*))
+--25797-- REDIR: 0x5105380 (libstdc++.so.6:operator delete(void*)) redirected to 0x4c311d0 (operator delete(void*))
+--25797-- REDIR: 0x5a5eca0 (libc.so.6:__rawmemchr_sse2) redirected to 0x4c37050 (rawmemchr)
+--25797-- REDIR: 0x5a6c530 (libc.so.6:__strcat_sse2_unaligned) redirected to 0x4c32990 (strcat)
+==25797== 
+==25797== HEAP SUMMARY:
+==25797==     in use at exit: 12,269 bytes in 117 blocks
+==25797==   total heap usage: 808 allocs, 691 frees, 123,661 bytes allocated
+==25797== 
+==25797== Searching for pointers to 117 not-freed blocks
+==25797== Checked 318,304 bytes
+==25797== 
+==25797== 2 bytes in 1 blocks are still reachable in loss record 1 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51252A0: std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC42: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 2 bytes in 1 blocks are still reachable in loss record 2 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5124D80: std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC8F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 2 bytes in 1 blocks are still reachable in loss record 3 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122690: std::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51325BF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 2 bytes in 1 blocks are still reachable in loss record 4 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122170: std::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132625: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 2 bytes in 1 blocks are still reachable in loss record 5 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5178A40: std::__numpunct_cache<char>::_M_cache(std::locale const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BB3D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BBD3: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51881A4: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x414EC4: operator<<(std::ostream&, Articulo const&) (articulo.cpp:31)
+==25797==    by 0x404993: main (test-caso4-consola.cpp:112)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 6 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5126524: std::__cxx11::numpunct<char>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AB40: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 7 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125268: std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC42: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 8 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5124D48: std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC8F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 9 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51267B6: std::__cxx11::numpunct<wchar_t>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AE61: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 10 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125F9F: std::__cxx11::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AF5F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 11 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51259BF: std::__cxx11::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AFAD: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 12 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5123A14: std::numpunct<char>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51324E5: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 13 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122658: std::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51325BF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 14 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122138: std::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132625: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 15 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5123CA6: std::numpunct<wchar_t>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51327C6: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 16 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x512338F: std::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132894: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 3 bytes in 1 blocks are still reachable in loss record 17 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122DAF: std::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51328FA: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 4 bytes in 1 blocks are still reachable in loss record 18 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125184: std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC42: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 4 bytes in 1 blocks are still reachable in loss record 19 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122574: std::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51325BF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 4 bytes in 1 blocks are still reachable in loss record 20 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5178AA5: std::__numpunct_cache<char>::_M_cache(std::locale const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BB3D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BBD3: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51881A4: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x414EC4: operator<<(std::ostream&, Articulo const&) (articulo.cpp:31)
+==25797==    by 0x404993: main (test-caso4-consola.cpp:112)
+==25797== 
+==25797== 5 bytes in 1 blocks are still reachable in loss record 21 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5124C64: std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC8F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 5 bytes in 1 blocks are still reachable in loss record 22 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122054: std::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132625: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 5 bytes in 1 blocks are still reachable in loss record 23 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5178AFA: std::__numpunct_cache<char>::_M_cache(std::locale const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BB3D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BBD3: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51881A4: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x414EC4: operator<<(std::ostream&, Articulo const&) (articulo.cpp:31)
+==25797==    by 0x404993: main (test-caso4-consola.cpp:112)
+==25797== 
+==25797== 8 bytes in 1 blocks are still reachable in loss record 24 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125FF9: std::__cxx11::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AF5F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 8 bytes in 1 blocks are still reachable in loss record 25 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125A19: std::__cxx11::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AFAD: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 8 bytes in 1 blocks are still reachable in loss record 26 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51233E9: std::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132894: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 8 bytes in 1 blocks are still reachable in loss record 27 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122E09: std::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51328FA: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 28 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B1DB: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 29 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x517762B: std::__timepunct<char>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AD27: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 30 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5151C53: std::__cxx11::messages<char>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511ADBA: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 31 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x519D9BB: std::__timepunct<wchar_t>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B045: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 32 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x515C173: std::__cxx11::messages<wchar_t>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B0D8: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 33 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5177D13: std::messages<char>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132762: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 12 bytes in 1 blocks are still reachable in loss record 34 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x519E093: std::messages<wchar_t>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132A0F: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 35 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AB5C: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 36 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AB8D: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 37 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511ACAB: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 38 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511ACDC: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 39 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AD43: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 40 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AD74: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 41 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AE7D: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 42 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AEAE: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 43 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5126059: std::__cxx11::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AF5F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 44 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AFC9: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 45 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AFFA: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 46 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B061: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 47 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B092: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 48 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B0F4: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 49 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B125: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 50 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x513265C: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 51 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51326AC: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 52 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51326FC: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 53 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5123449: std::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132894: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 54 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5132927: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 55 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x513296D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 16 bytes in 1 blocks are still reachable in loss record 56 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51329B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 20 bytes in 1 blocks are still reachable in loss record 57 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125A79: std::__cxx11::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AFAD: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 20 bytes in 1 blocks are still reachable in loss record 58 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122E69: std::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51328FA: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 59 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AAE3: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 60 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AB11: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 61 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511ABBE: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 62 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AC11: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 63 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AC5E: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 64 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AE04: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 65 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AE32: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 66 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AEDF: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 67 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AF2D: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 68 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AF7B: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 69 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51324B8: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 70 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5132523: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 71 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5132590: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 72 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51325F6: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 73 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5132799: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 74 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51327FD: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 75 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5132865: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 24 bytes in 1 blocks are still reachable in loss record 76 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51328CB: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 32 bytes in 1 blocks are still reachable in loss record 77 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511ADA5: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 32 bytes in 1 blocks are still reachable in loss record 78 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B0C3: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 32 bytes in 1 blocks are still reachable in loss record 79 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x513274C: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 32 bytes in 1 blocks are still reachable in loss record 80 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51329F9: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 40 bytes in 1 blocks are still reachable in loss record 81 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B71E: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 40 bytes in 1 blocks are still reachable in loss record 82 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AD0D: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 40 bytes in 1 blocks are still reachable in loss record 83 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511B02B: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 96 bytes in 1 blocks are still reachable in loss record 84 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511A91D: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 112 bytes in 1 blocks are still reachable in loss record 85 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51252D1: std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC42: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 112 bytes in 1 blocks are still reachable in loss record 86 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5124DB1: std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AC8F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 112 bytes in 1 blocks are still reachable in loss record 87 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51226C1: std::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51325BF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 112 bytes in 1 blocks are still reachable in loss record 88 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51221A1: std::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132625: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 144 bytes in 1 blocks are still reachable in loss record 89 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51264B9: std::__cxx11::numpunct<char>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AB40: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 144 bytes in 1 blocks are still reachable in loss record 90 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x51239A9: std::numpunct<char>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51324E5: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 144 bytes in 1 blocks are still reachable in loss record 91 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x517BAD9: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x517BBD3: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51881A4: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x414EC4: operator<<(std::ostream&, Articulo const&) (articulo.cpp:31)
+==25797==    by 0x404993: main (test-caso4-consola.cpp:112)
+==25797== 
+==25797== 160 bytes in 1 blocks are still reachable in loss record 92 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5126089: std::__cxx11::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AF5F: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 160 bytes in 1 blocks are still reachable in loss record 93 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5125AA9: std::__cxx11::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AFAD: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 160 bytes in 1 blocks are still reachable in loss record 94 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5123479: std::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132894: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 160 bytes in 1 blocks are still reachable in loss record 95 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5122E99: std::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51328FA: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 336 bytes in 1 blocks are still reachable in loss record 96 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5126749: std::__cxx11::numpunct<wchar_t>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AE61: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 336 bytes in 1 blocks are still reachable in loss record 97 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5123C39: std::numpunct<wchar_t>::_M_initialize_numpunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x51327C6: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 368 bytes in 1 blocks are still reachable in loss record 98 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511A899: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 368 bytes in 1 blocks are still reachable in loss record 99 of 117
+==25797==    at 0x4C3089F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511A8EA: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 100 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x513BDA8: std::ctype<char>::ctype(__locale_struct*, unsigned short const*, bool, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AAC7: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 101 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x511427F: std::codecvt<char, char, __mbstate_t>::codecvt(__locale_struct*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AAF5: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 102 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x511ABF0: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 103 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x51268CE: std::__timepunct<char>::_M_initialize_timepunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5177607: std::__timepunct<char>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AD27: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 104 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x5151C30: std::__cxx11::messages<char>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511ADBA: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 105 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x512CFBF: std::ctype<wchar_t>::ctype(__locale_struct*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511ADE8: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 106 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x51142FF: std::codecvt<wchar_t, char, __mbstate_t>::codecvt(__locale_struct*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AE16: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 107 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x511AF0C: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 108 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x512724D: std::__timepunct<wchar_t>::_M_initialize_timepunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x519D997: std::__timepunct<wchar_t>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B045: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 109 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x515C150: std::__cxx11::messages<wchar_t>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B0D8: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 110 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x5132555: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 111 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x5177CF0: std::messages<char>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132762: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 112 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x513282A: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 376 bytes in 1 blocks are still reachable in loss record 113 of 117
+==25797==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x59E2ED1: duplocale (duplocale.c:53)
+==25797==    by 0x519E070: std::messages<wchar_t>::messages(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5132A0F: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B16A: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 400 bytes in 1 blocks are still reachable in loss record 114 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5126FE9: std::__timepunct<char>::_M_initialize_timepunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x5177607: std::__timepunct<char>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511AD27: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 400 bytes in 1 blocks are still reachable in loss record 115 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x5127959: std::__timepunct<wchar_t>::_M_initialize_timepunct(__locale_struct*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x519D997: std::__timepunct<wchar_t>::__timepunct(__locale_struct*, char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B045: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 576 bytes in 1 blocks are still reachable in loss record 116 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511AAB0: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== 1,344 bytes in 1 blocks are still reachable in loss record 117 of 117
+==25797==    at 0x4C3017F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25797==    by 0x511ADD6: std::locale::_Impl::_Impl(char const*, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x511B731: std::locale::locale(char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==25797==    by 0x403187: main (test-caso4-consola.cpp:27)
+==25797== 
+==25797== LEAK SUMMARY:
+==25797==    definitely lost: 0 bytes in 0 blocks
+==25797==    indirectly lost: 0 bytes in 0 blocks
+==25797==      possibly lost: 0 bytes in 0 blocks
+==25797==    still reachable: 12,269 bytes in 117 blocks
+==25797==         suppressed: 0 bytes in 0 blocks
+==25797== 
+==25797== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==25797== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

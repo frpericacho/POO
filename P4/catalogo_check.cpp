@@ -31,7 +31,7 @@ int main(int argc, const char **argv){
 	        c1.memberVariable("Articulo", {"stock_"}, {"?"}, {false}, "Revisa el enunciado respecto a los atributos que deben estar en cada clase.");
         	c1.memberVariable("ArticuloAlmacenable", {"stock_"}, {"noconst"}, {true}, "Revisa el enunciado respecto a los atributos que deben estar en cada clase.");
 	        c1.virtualMethod({"~Articulo"},{{}},"Articulo",{"noconst"}, "Contempla crear un destructor apropiado para esta clase.");
-        	c1.functionWithReferencedMethod({"operator<<"},{{"class std::basic_ostream<char> &","const class Articulo &"}},{"impresion_especifica"},{{"class std::basic_ostream<char> &"}},"Articulo",{"const"},"Incluya impresion_especifica en el operador de extracción");
+        	c1.functionWithReferencedMethod({"operator<<"},{{"class std::basic_ostream<char> &","const class Articulo &"}},{"impresion_especifica"},{{"class std::basic_ostream<char> &"}},"Articulo",{"const"},"Incluya impresion_especifica en el operador de inserción");
 	        c1.methodWithReferencedMemberVariable({"impresion_especifica"}, {{"class std::basic_ostream<char> &"}}, "Libro", {"const"}, {"n_pag_"}, "Revisa qué debe imprimir la definición del método impresion_especifica en cada clase.");
         	c1.methodWithReferencedMemberVariable({"impresion_especifica"}, {{"class std::basic_ostream<char> &"}}, "Libro", {"const"}, {"stock_"},"Revisa qué debe imprimir la definición del método impresion_especifica en cada clase.");
 	        c1.methodWithReferencedMemberVariable({"impresion_especifica"}, {{"class std::basic_ostream<char> &"}}, "Cederron", {"const"}, {"tam_"},"Revisa qué debe imprimir la definición del método impresion_especifica en cada clase.");
@@ -124,7 +124,7 @@ int main(int argc, const char **argv){
 
                 c4.listInitializerConstructor("Pedido", {"?"}, {"int", "const class Tarjeta *", "class Fecha", "double"}, "Revisa la lista de inicialización del constructor."); //Ponemos ? como lista de parámetros porque solo debe haber un constructor. La regla funcionará cualquiera sea el orden en el que se pongan los inicializadores en el constructor
 
-		c4.function({"operator<<"},{{"class std::basic_ostream<char> &", "const class Pedido &"}}, "Revisa el enunciado respecto al operador de extracción.");
+		c4.function({"operator<<"},{{"class std::basic_ostream<char> &", "const class Pedido &"}}, "Revisa el enunciado respecto al operador de inserción.");
 
                 c4.memberVariable("Pedido", {"tarjeta_"}, {"const"}, {true}, "Revisa el enunciado respecto al atributo de la tarjeta de pago.");
 
