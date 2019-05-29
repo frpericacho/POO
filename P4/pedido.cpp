@@ -14,24 +14,12 @@ Pedido::Pedido(Usuario_Pedido &up, Pedido_Articulo &pa, Usuario &user,
 
   Usuario::Articulos carro = user.compra();
 
-  // for(auto &[articulo, cantidad]: carro){
-  //     if(articulo->stock() < cantidad){
-  //         const_cast<Usuario::Articulos&>(user.compra()).clear();
-  //         throw Pedido::SinStock(articulo);
-  //     }
-  //     articulo->stock() -= cantidad;
-  //     pa.pedir(*this, *articulo,articulo->precio(),cantidad);
-  //     total_ += articulo->precio()*cantidad;
-  //     user.compra(*articulo, 0);
-  //     pedido_vacio = false;
-  // }
-
   for (auto &[articulo, cantidad] : carro) {
-    if (auto *libroDig = dynamic_cast<LibroDigital *>(articulo)) {
-      if (libroDig->f_expir() < Fecha())
+    if (auto *libroD = dynamic_cast<LibroDigital *>(articulo)) {
+      if (libroD->f_expir() < Fecha())
         user.compra(*articulo, 0);
       else {
-        pa.pedir(*this, *libroDig, articulo->precio(), cantidad);
+        pa.pedir(*this, *libroD, articulo->precio(), cantidad);
         total_ += articulo->precio() * cantidad;
         user.compra(*articulo, 0);
         pedido_vacio = false;
