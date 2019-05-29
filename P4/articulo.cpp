@@ -1,41 +1,35 @@
 #include "articulo.hpp"
+#include <iomanip>
 #include "cadena.hpp"
 #include "fecha.hpp"
-#include <iomanip>
 
-Articulo::Articulo(Autores autr,const Cadena &ref,const Cadena &til,const Fecha &publi,double precio):
-    autor_(autr) ,referencia_(ref), titulo_(til),f_publi_(publi),precio_(precio){}
-
-const Cadena Articulo::referencia() const{
-    return referencia_;
+Articulo::Articulo(Autores autr, const Cadena &ref, const Cadena &til,
+                   const Fecha &publi, double precio)
+    : autor_(autr),
+      referencia_(ref),
+      titulo_(til),
+      f_publi_(publi),
+      precio_(precio) {
+  if (autor_.empty()) throw Autores_vacios();
 }
 
-const Cadena Articulo::titulo() const{
-    return titulo_;
-}
+inline const Cadena &Articulo::referencia() const { return referencia_; }
 
-const Fecha Articulo::f_publi() const{
-    return f_publi_;
-}
+inline const Cadena &Articulo::titulo() const { return titulo_; }
 
-unsigned ArticuloAlmacenable::stock() const{
-    return stock_;
-}
+inline const Fecha &Articulo::f_publi() const { return f_publi_; }
 
-unsigned& ArticuloAlmacenable::stock(){
-    return stock_;
-}
+inline const Articulo::Autores &Articulo::autores() const { return autor_; }
 
-double Articulo::precio() const{
-    return precio_;
-}
-
-double& Articulo::precio(){
-    return precio_;
-}
-
-std::ostream &operator<<(std::ostream &os, const Articulo &art){
-    os << "[" << art.referencia() << "] " <<  art.titulo() << " , " 
-        << art.f_publi() << " , " << art.precio(); 
-    return os;
+std::ostream &operator<<(std::ostream &os, const Articulo &art) {
+  os << "[" << art.referencia() << "] \"" << art.titulo() << "\", de ";
+  auto autor = art.autores().begin();
+  os << (*autor)->apellidos();
+  for (++autor; autor != art.autores().end(); ++autor)
+    os << ", " << (*autor)->apellidos();
+  os << ". ";
+  os << art.f_publi().anno() << ". " << std::fixed << std::setprecision(2)
+     << art.precio() << " €\n\t";
+  art.impresion_especifica(os);
+  return os;
 }

@@ -46,7 +46,7 @@ CXX = clang++
 # c++14: estándar de 2014 - Recomendado si su compilador lo admite.
 # c++17: estándar de 2017 - Se puede usar si su compilador lo admite.
 # c++2y: estándar previsto para 2020. Experimental, no recomendado.
-STD = c++14
+STD = c++17
 
 # Opciones para el compilador. Añada o quite las que prefiera pero deje
 # al menos la primera. Recomendado: no quite ninguna.
